@@ -1,0 +1,211 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Calorie Calculator</title>
+    <link rel="stylesheet" type="text/css" href="../public/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Calorie Calculator</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <a href="index.html">Home</a>
+            <a href="register.html">Register</a>
+            <a href="profile.html">Profile</a>
+            <!-- Add links to other sections of your website as needed -->
+        </ul>
+    </nav>
+
+    <div class="grid">
+        <header>
+            <section>
+                <h2>Activity Level Guide:</h2>
+                <p>In order to calculate the estimate amount of calories burned, we need to quantify the amount of hours spent on different activities on the average day. <br> <br> To get an accurate calculation, follow the guidelines below:</p>
+                <h3>Resting:</h3>
+                <p>Sleeping, non-movement</p>
+                <h3>Very Light Activity:</h3>
+                <p>Standing, sitting, etc. Example: on a couch watching netflix, on a computer, sitting in class, ...</p>
+                <h3>Light Activity:</h3>
+                <p>Walking, stretching, activities with some movement. Example: shopping, doing errands/chores, sporadic activities</p>
+                <h3>Moderate Activity:</h3>
+                <p>Traditional weight lifting, jogging, occational time in gym</p>
+                <h3>Heavy Activity:</h3>
+                <p>Sprints, intense cardio, very high intesity workouts</p>
+            </section>
+        </header>
+        <!-- <aside>teset</aside> -->
+        <main>
+            <section id="calorie-calculator">
+                <h2>Calculate Your Daily Calorie Requirements</h2>
+                <form id="calculate_calories_form" method="POST" onsubmit="activity_level(event)">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" required><br>
+
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select><br>
+
+                    <label for="weight">Weight (lbs):</label>
+                    <input type="number" id="weight" name="weight" required><br>
+
+                    <label for="height">Height (in):</label>
+                    <input type="number" id="height" name="height" required><br> <br>
+                    
+                    <label for="activity-level">Activity Level :</label> <p>(Hours MUST add up to 24 hours) </p>   
+                    <label for="Resting">Resting (hours):</label>
+                    <input type="number" id="Resting" name="Resting" required><br>
+                    
+                    <label for="VeryLightActivity">Very Light Activity (hours):</label>
+                    <input type="number" id="VeryLightActivity" name="VeryLightActivity" required><br>
+                    
+                    <label for="LightActivity">Light Activity (hours):</label>
+                    <input type="number" id="LightActivity" name="LightActivity" required><br>
+                    
+                    <label for="ModerateActivity">Moderate Activity (hours):</label>
+                    <input type="number" id="ModerateActivity" name="ModerateActivity" required><br>
+                    
+                    <label for="HeavyActivity">Heavy Activity (hours):</label>
+                    <input type="number" id="HeavyActivity" name="HeavyActivity" required><br> <br>
+
+                    <label for="weightGoal">Weight Goal:</label>
+                    <select id="weightGoal" name="weightGoal" required>
+                        <option value="weightLoss">Weight Loss</option>
+                        <option value="weightMaintain">Weight Maintanence</option>
+                        <option value="weightGain">Weight Gain</option>
+                    </select> <br>
+
+                    <label for="goalLBS">Goal lbs (per week):</label>
+                    <input type="number" id="goalLBS" name="goalLBS" required> <br>
+
+                    <input type="submit" value="Calculate">
+                </form>
+            </section>
+            <section id="activity-level">
+                <h2>Your Activity Level</h2>
+                <ul id="calc-list"></ul>
+            </section>
+            </section>
+            <section id="bmr">
+                <h2>Your Basal Metabolic Rate</h2>
+                <ul id="bmr-list"></ul>
+            </section>
+            <section>
+                <h2>Your Calories Based on Goals</h2>
+                <ul id="goal-list"></ul>
+            </section>
+            <section>
+                <h2>Macros</h2>
+                <ul id="macro-list"></ul>
+            </section>
+        </main>
+        <!-- <aside>test</aside> -->
+        <footer>test</footer>
+    </div>
+
+    <script>
+        function calcBMR(age, weight, height, sex) {
+            const weightToKilo = weight / 2.2;
+            const heightToCentimeter = height * 2.54
+
+            let base = 10 * weightToKilo + 6.25 * heightToCentimeter - 5 * age;
+            if (sex == 'male') {
+                base += 5;
+            } else if (sex == 'female'){
+                base -= 161;
+            }
+
+            return base
+        }
+        function goals(weightGoal, goalLBS, bmr, activity_level){
+            let calories = bmr * activity_level;
+            if (weightGoal === 'weightMaintain') {
+                return `Calories for weight mainanence - ${calories.toFixed(0)} Calories`;
+            }
+            if (weightGoal === 'weightLoss') {
+                calories = calories - (goalLBS * 500);
+                return `Calories for weight loss - ${calories.toFixed(0)} Calories`;
+            }
+            if (weightGoal === 'weightGain') {
+                calories = calories + (goalLBS * 500);
+                return `Calories for weight gain - ${calories.toFixed(0)} Calories`;
+            }
+        }
+        function activity_level(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Get form data
+            const age = document.getElementById("age").value;
+            const weight = document.getElementById("weight").value;
+            const sex = document.getElementById("gender").value;
+            const height = document.getElementById("height").value;
+            const resting = parseFloat(document.getElementById("Resting").value);
+            const veryLightActivity = parseFloat(document.getElementById("VeryLightActivity").value);
+            const lightActivity = parseFloat(document.getElementById("LightActivity").value);
+            const moderateActivity = parseFloat(document.getElementById("ModerateActivity").value);
+            const heavyActivity = parseFloat(document.getElementById("HeavyActivity").value);
+
+            const weightGoal = document.getElementById("weightGoal").value;
+            const goalLBS = parseFloat(document.getElementById("goalLBS").value);
+
+            const checkHours = resting + veryLightActivity + lightActivity + moderateActivity + heavyActivity;
+            
+            if (checkHours !== 24) {
+                // Create an error message element
+                const errorMessage = document.createElement("p");
+                errorMessage.textContent = "Error: The total hours should be equal to 24. Please adjust your input.";
+                errorMessage.style.color = "red";  // Set the text color to red, for example
+
+                // Insert the error message next to the calculate button
+                const calculateButton = document.querySelector("#calculate_calories_form [type='submit']");
+                calculateButton.parentNode.insertBefore(errorMessage, calculateButton.nextSibling);
+
+                // Optionally, you can also remove the error message after a certain duration or when the user interacts with the form again
+                setTimeout(() => {
+                    errorMessage.remove();
+                }, 5000);  // Remove the error message after 5 seconds (adjust the duration as needed)
+                return;
+            } else {
+                // Continue with the rest of your calculations
+                const activityFactor = checkHours / 24;
+                // Add more calculations or actions here
+            }
+
+            // VALUES TO DISPLAY
+            const activityFactor = (resting * 1 + veryLightActivity * 1.2 + lightActivity * 2.5 + moderateActivity * 5 + heavyActivity * 7)/24
+            const base = calcBMR(age, weight, height, sex);
+            const goalCals = goals(weightGoal, goalLBS, base, activityFactor);
+
+            // DISPLAY
+            const calc = document.getElementById('calc-list');
+            calc.innerHTML = "";
+            const aF = document.createElement("li");
+            aF.textContent = `Activity Factor- ${activityFactor.toFixed(2)} `
+            calc.appendChild(aF);
+
+            const bmr = document.createElement("li");
+            const bmrLog = document.getElementById('bmr-list');
+            bmrLog.innerHTML = "";
+            bmr.textContent = `Basal Metabolic Rate- ${base.toFixed(0)} Calories`
+            bmrLog.appendChild(bmr)
+
+            const gw = document.createElement("li");
+            const gwLog = document.getElementById('goal-list');
+            gwLog.innerHTML = "";
+            gw.textContent = `${goalCals}`;
+            gwLog.appendChild(gw);
+        }
+    </script>
+
+    <footer>
+        <p>&copy; 2023 Calorie Counting Website</p>
+    </footer>
+</body>
+</html>
+
+
+
+
