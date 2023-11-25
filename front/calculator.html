@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Calorie Calculator</title>
-    <link rel="stylesheet" type="text/css" href="../public/styles.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/styles.css">
 </head>
 <body>
     <header>
@@ -196,6 +196,7 @@
             const gwLog = document.getElementById('goal-list');
             gwLog.innerHTML = "";
             gw.textContent = `${goalCals}`;
+            console.log(goalCals);  
             gwLog.appendChild(gw);
         }
     </script>
