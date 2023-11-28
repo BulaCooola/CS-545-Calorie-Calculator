@@ -1,6 +1,6 @@
-import EmailValidator from 'email-validator';
+// const EmailValidator = require('email-validator');
 
-export function checkLetter(char) {
+function checkLetter(char) {
     if (/[a-z]+/gi.test(char)) {
         return true;
     }
@@ -14,7 +14,7 @@ function includesUpper(str) {
     return false;
 }
 
-export function checkString(str) {
+function checkString(str) {
     if (!str || typeof str !== `string` || str.trim().length === 0) {
       throw `Error: ${str} is not a valid string`;
     }
@@ -35,15 +35,15 @@ function includesSpecial(str) {
     return false;
 }
 
-export function checkEmail(str) {
-    const email = checkString(str).toLowerCase();
-    if (!EmailValidator.validate(email)) {
-        throw `Error: ${email} is an invalid email`;
-    }
-    return email;
-}
+// function checkEmail(str) {
+//     const email = checkString(str).toLowerCase();
+//     if (!EmailValidator.validate(email)) {
+//         throw `Error: ${email} is an invalid email`;
+//     }
+//     return email;
+// }
 
-export function checkPassword(str) {
+function checkPassword(str) {
     const password = checkString(str);
 
     if (password.length < 5 || password.length > 20) {
@@ -55,7 +55,7 @@ export function checkPassword(str) {
     return password;
 }
 
-export function checkUsername(str) {
+function checkUsername(str) {
     let name = checkString(str);
     if (name.length < 3 || name.length > 15) {
         throw `Error: ${name} must be between 3 to 15 characters`;
@@ -67,3 +67,14 @@ export function checkUsername(str) {
     }
     return name;
 }
+
+module.exports = {
+    checkLetter,
+    includesUpper,
+    checkString,
+    includesNum,
+    includesSpecial,
+    // checkEmail,
+    checkPassword,
+    checkUsername,
+};
