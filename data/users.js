@@ -20,3 +20,8 @@ export const registerUser = async (
 
 
 }
+
+const getDataByName = async (username)=>{
+    username = validation.checkUsername(username);
+    
+}
