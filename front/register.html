@@ -3,8 +3,10 @@
 <head>
     <title>Register an Account</title>
     <link rel="stylesheet" type="text/css" href="../public/css/register.css">
+    <script defer src="../helper.js"></script>
 </head>
 <body>
+    <div id="error"></div>
     <header>
         <h1>Register an Account</h1>
     </header>
@@ -19,7 +21,7 @@
     <main>
         <section id="registration-form">
             <h2>Create an Account</h2>
-            <form action="register.php" method="POST">
+            <form id="form" action="register.php" method="POST">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required><br>
 
@@ -27,10 +29,10 @@
                 <input type="email" id="email" name="email" required><br>
 
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required><br>
+                <input type="password" id="password" name="password"><br>
 
                 <label for="confirm-password">Confirm Password:</label>
-                <input type="password" id="confirm-password" name="confirm-password" required><br>
+                <input type="password" id="confirm-password" name="confirm-password"><br>
 
                 <input type="submit" value="Register">
             </form>
