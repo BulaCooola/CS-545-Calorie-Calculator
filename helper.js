@@ -1,49 +1,49 @@
 // const EmailValidator = require('email-validator');
+import * as EmailValidator from 'email-validator';
 
-function checkLetter(char) {
+const exportedMethods = {
+ checkLetter(char) {
     if (/[a-z]+/gi.test(char)) {
         return true;
     }
     return false;
-}
+},
 
-function includesUpper(str) {
+ includesUpper(str) {
     if (/[A-Z]+/g.test(str)) {
         return true;
     }
     return false;
-}
+},
 
-function checkString(str) {
+ checkString(str) {
     if (!str || typeof str !== `string` || str.trim().length === 0) {
       throw `Error: ${str} is not a valid string`;
     }
     return str.trim();
-};
-
-function includesNum(str) {
+},
+ includesNum(str) {
     if (/\d+/g.test(str)) {
         return true;
     }
     return false;
-}
-
-function includesSpecial(str) {
+},
+ includesSpecial(str) {
     if (/[^a-zA-Z0-9]/g.test(str)) {
         return true;
     }
     return false;
-}
+},
 
-// function checkEmail(str) {
-//     const email = checkString(str).toLowerCase();
-//     if (!EmailValidator.validate(email)) {
-//         throw `Error: ${email} is an invalid email`;
-//     }
-//     return email;
-// }
+checkEmail(str) {
+     const email = checkString(str).toLowerCase();
+     if (!EmailValidator.validate(email)) {
+         throw `Error: ${email} is an invalid email`;
+     }
+     return email;
+},
 
-function checkPassword(str) {
+ checkPassword(str) {
     const password = checkString(str);
 
     if (password.length < 5 || password.length > 20) {
@@ -53,9 +53,9 @@ function checkPassword(str) {
         throw `Error: Password must contain at least one number, one uppercase character, and one special character`;
     }
     return password;
-}
+},
 
-function checkUsername(str) {
+ checkUsername(str) {
     let name = checkString(str);
     if (name.length < 3 || name.length > 15) {
         throw `Error: ${name} must be between 3 to 15 characters`;
@@ -67,14 +67,5 @@ function checkUsername(str) {
     }
     return name;
 }
-
-module.exports = {
-    checkLetter,
-    includesUpper,
-    checkString,
-    includesNum,
-    includesSpecial,
-    // checkEmail,
-    checkPassword,
-    checkUsername,
-};
+}
+export default exportedMethods
