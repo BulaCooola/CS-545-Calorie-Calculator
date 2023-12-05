@@ -1,5 +1,7 @@
 import {users} from '../config/mongoCollections.js';
 import {checkUsername, checkEmail, checkPassword} from '../helper.js'
+import bcrypt from 'bcrypt';
+
 export const registerUser = async (
     username,
     emailAddress,
@@ -18,12 +20,17 @@ export const registerUser = async (
     if(password !== confirmPassword){
         throw 'passwords must be the same';
     }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
     const userCollection = await users();
     let newUser = { 
         username:username,
         emailAddress:emailAddress,
-        password:password,
-        confirmPassword:confirmPassword
+        password: hashedPassword,
+        currentGoal: '',
+        activity_level: 1,
+        BMR: 0,
+        caloric_needs: 0,
     }
     let insertInfo = await userCollection.insertOne(newUser);
     if (!insertInfo.acknowledged || !insertInfo.insertedId) {
@@ -41,4 +48,8 @@ export const getDataByName = async (username)=>{
     if (!user) throw 'Error: User not found';
     return user;
 
+}
+
+export const saveData = async () => {
+    
 }

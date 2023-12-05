@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "My lab 10 module",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "email-validator": "^2.0.4",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
