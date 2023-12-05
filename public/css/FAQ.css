@@ -1,0 +1,117 @@
+
+body {
+    font-family: 'Calibri', sans-serif;
+    /* font-size: 18pt */
+    /* background from https://www.svgbackgrounds.com/ */
+    background-color: #ffffff;
+    /* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%23E23636' cx='50' cy='0' r='50'/%3E%3Cg fill='%23d73333' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%23cb3131' cx='50' cy='100' r='50'/%3E%3Cg fill='%23c02e2e' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%23b52b2b' cx='50' cy='200' r='50'/%3E%3Cg fill='%23aa2929' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%239e2626' cx='50' cy='300' r='50'/%3E%3Cg fill='%23932323' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%23882020' cx='50' cy='400' r='50'/%3E%3Cg fill='%237c1e1e' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%23711b1b' cx='50' cy='500' r='50'/%3E%3Cg fill='%23661818' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%235a1616' cx='50' cy='600' r='50'/%3E%3Cg fill='%234f1313' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%23441010' cx='50' cy='700' r='50'/%3E%3Cg fill='%23390e0e' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%232d0b0b' cx='50' cy='800' r='50'/%3E%3Cg fill='%23220808' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%23170505' cx='50' cy='900' r='50'/%3E%3Cg fill='%230b0303' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%23000000' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E"); */
+    background-attachment: fixed;
+    background-size: contain;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #ffffff;
+    text-align: center;
+    font-variant: small-caps;
+    font-family: Impact, sans-serif;
+    font-weight: 300;
+    letter-spacing: 2px;
+    font-style: italic;
+    font-size: 50pt;
+    text-shadow: 20px 20px 20px rgba(0, 0, 0, 0.1);
+
+    background-color: #504a4a;
+    margin: 20px 0;
+    border-radius: 20px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+/* ********************** NAVIGATION ************************* */
+ul.navigation {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    
+    background-color:rgba(153, 153, 153, 0.605);
+    border: 2px solid;
+    margin: 0;
+    margin-left: 200px;
+    margin-right: 200px;
+    padding: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    list-style-type: none;
+}
+
+ul li a {
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    margin: 0px 10px;
+    position: relative;
+    transition: all .5s;
+}
+
+a:hover {
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+a::before {
+    content: "";
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    height: 12px;
+    width: 12px;
+    border: 3px solid rgb(0, 0, 0);
+    border-width: 0 0 3px 3px;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+a::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    height: 12px;
+    width: 12px;
+    border: 3x solid rgb(0, 0, 0);
+    border-width: 0 0 3px 3px;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+a:hover::before {
+    opacity: 1;
+    bottom: -8px;
+    left: -8px;
+}
+
+a:hover::after {
+    opacity: 1;
+    top: -8px;
+    right: -8px;
+}
+/* ***************************************** */
+.faq-item {
+    margin: 10px 20px 10px 20px;
+    & .question {
+        font-weight: 600;
+        font-size: 32px;
+    }
+    & .answer {
+        margin-left: 20px;
+        font-size: 18px;
+    }
+}
