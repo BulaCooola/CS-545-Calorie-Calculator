@@ -1,3 +1,4 @@
+import {users} from '../config/mongoCollections.js';
 import validation from '..helper/js'
 export const registerUser = async (
     username,
@@ -17,11 +18,26 @@ export const registerUser = async (
     if(password !== confirmPassword){
         throw 'passwords must be the same';
     }
-
+    const userCollection = await users();
+    let newUser = { 
+        username:username,
+        emailAddress:emailAddress,
+        password:password,
+        confirmPassword:confirmPassword
+    }
+    
+    let insertInfo = await userCollection.insertOne(newUser);
+    if (!insertInfo.acknowledged || !insertInfo.insertedId) {
+        throw 'Could not add user';
+    }
+    return {insertedUser:true};
 
 }
 
-const getDataByName = async (username)=>{
+export const getDataByName = async (username)=>{
     username = validation.checkUsername(username);
-    
+    const user = await userCollection.findOne({_username:username});
+    if (!user) throw 'Error: User not found';
+    return user;
+
 }
