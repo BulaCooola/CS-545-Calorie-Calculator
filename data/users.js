@@ -1,5 +1,5 @@
 import {users} from '../config/mongoCollections.js';
-import validation from '..helper/js'
+import validation from '../helper.js'
 export const registerUser = async (
     username,
     emailAddress,
