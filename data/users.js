@@ -37,6 +37,7 @@ export const getDataByName = async (username)=>{
     username = checkUsername(username);
     const userCollection = await users();
     const user = await userCollection.find({}).toArray();
+    console.log(user);
     if (!user) throw 'Error: User not found';
     return user;
 

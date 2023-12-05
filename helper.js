@@ -57,7 +57,6 @@ export const checkPassword = (str) =>{
 
 export const checkUsername = (str) => {
     let name = checkString(str);
-    console.log(name);
     if (name.length < 3 || name.length > 15) {
         throw `Error: ${name} must be between 3 to 15 characters`;
     }

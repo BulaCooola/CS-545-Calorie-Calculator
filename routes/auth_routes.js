@@ -23,7 +23,7 @@ router
 
       let userCheck = await registerUser(registrationUser.username, registrationUser.email, registrationUser.password, registrationUser.confirm_password);
       if (userCheck.insertedUser) {
-        return res.sendFile(path.resolve('front/profile.html'));
+       return res.redirect('profile.html');
       }
       else {
         return res.status(500).send('error: Could not register user');
@@ -35,8 +35,6 @@ router
     
   });
   router.route('/profile.html').get(async (req, res) => {
-    let user = req.body;
-    let getData = await getDataByName(user.username);
     res.sendFile(path.resolve('front/profile.html'));
   });
   router.route('/calculator.html').get(async (req, res) => {
@@ -45,6 +43,9 @@ router
   router.route('/logout').get(async (req, res) => {
     req.session.destroy();
     return res.sendFile(path.resolve('front/logout.html'));
+  });
+  router.route('/FAQ.html').get(async (req, res) => {
+    res.sendFile(path.resolve('front/FAQ.html'));
   });
 
 export default router;
