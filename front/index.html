@@ -5,13 +5,12 @@
     <link rel="stylesheet" type="text/css" href="../public/css/index.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to the Calorie Counting Website</h1>
-        <p class="h1">Easily calculate your calories to achieve your weight goals!</p>
-    </header>
+    <h1>Calorie Counter</h1>
+    <p class="h1">Easily calculate your calories to achieve your weight goals!</p>
 
     <ul class="navigation">
         <li><a href="index.html">Home</a></li>
+        <li><a href="FAQ.html">FAQ</a></li>
         <li><a href="register.html">Register</a></li>
         <li><a href="profile.html">Profile</a></li>
         <li><a href="calculator.html">Calorie Calculator</a></li>
@@ -40,63 +39,90 @@
         <!-- <aside>teset</aside> -->
         <main class="calorie-calculator">
             <form id="calculate_calories_form" method="POST" onsubmit="activity_level(event)">
+                
                 <h2>Mifflin Calculator</h2>
-                <label for="age">Age:</label>
-                <input type="number" id="age" name="age" required><br>
 
-                <label for="gender">Gender:</label>
-                <select id="gender" name="gender" required>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select><br>
+                <label for="age">
+                    Age: 
+                    <input type="number" id="age" name="age" required>
+                </label>
 
-                <label for="weight">Weight (lbs):</label>
-                <input type="number" id="weight" name="weight" required><br>
+                <label for="sex">Sex: 
+                    <select id="sex" name="sex" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select><br>
+                </label>    
 
-                <label for="height">Height (in):</label>
-                <input type="number" id="height" name="height" required><br> <br>
+                <label for="weight">
+                    Weight (lbs): 
+                    <input type="number" id="weight" name="weight" required>
+                </label>
+
+                <label for="height">
+                    Height (in):
+                    <input type="number" id="height" name="height" required>
+                </label> 
                 
-                <label for="activity-level">Activity Level : <p class="small">(Hours MUST add up to 24 hours) </p> </label>
-                <label for="Resting">Resting (hours):</label>
-                <input type="number" id="Resting" name="Resting" required><br>
-                
-                <label for="VeryLightActivity">Very Light Activity (hours):</label>
-                <input type="number" id="VeryLightActivity" name="VeryLightActivity" required><br>
-                
-                <label for="LightActivity">Light Activity (hours):</label>
-                <input type="number" id="LightActivity" name="LightActivity" required><br>
-                
-                <label for="ModerateActivity">Moderate Activity (hours):</label>
-                <input type="number" id="ModerateActivity" name="ModerateActivity" required><br>
-                
-                <label for="HeavyActivity">Heavy Activity (hours):</label>
-                <input type="number" id="HeavyActivity" name="HeavyActivity" required><br> <br>
+                <h2>Activity Level: </h2>
+                <p class="small">(Hours MUST add up to 24 hours)  </p> 
+                <p class="small">Refer to Activity Level Guide for help!</p> 
 
-                <label for="weightGoal">Weight Goal:</label>
-                <select id="weightGoal" name="weightGoal" required>
-                    <option value="weightLoss">Weight Loss</option>
-                    <option value="weightMaintain">Weight Maintanence</option>
-                    <option value="weightGain">Weight Gain</option>
-                </select> <br>
+                <label for="Resting">
+                    Resting (hours): 
+                    <input type="number" id="Resting" name="Resting" required>
+                </label>
+                
+                <label for="VeryLightActivity">
+                    Very Light Activity (hours):
+                    <input type="number" id="VeryLightActivity" name="VeryLightActivity" required>
+                </label>
+                
+                <label for="LightActivity">
+                    Light Activity (hours):
+                    <input type="number" id="LightActivity" name="LightActivity" required>
+                </label>
+                
+                <label for="ModerateActivity">
+                    Moderate Activity (hours):
+                    <input type="number" id="ModerateActivity" name="ModerateActivity" required>
+                </label>
+                
+                <label for="HeavyActivity">
+                    Heavy Activity (hours):
+                    <input type="number" id="HeavyActivity" name="HeavyActivity" required>
+                </label> <br>
 
-                <label for="goalLBS">Goal lbs (per week):</label>
-                <input type="number" id="goalLBS" name="goalLBS" required> <br>
+                <label for="weightGoal">
+                    Weight Goal:
+                    <select id="weightGoal" name="weightGoal" required>
+                        <option value="weightLoss">Weight Loss</option>
+                        <option value="weightMaintain">Weight Maintanence</option>
+                        <option value="weightGain">Weight Gain</option>
+                    </select>
+                </label>
 
-                <input type="submit" value="Calculate">
+                <label for="goalLBS">
+                    Goal lbs (per week):
+                    <input type="number" id="goalLBS" name="goalLBS" required>
+                </label>
+
+                <input type="submit" id="button" value="Calculate">
+                <input type="submit" value="Save to Profile">
             </form>
         </main>
-        <aside>
+        <aside class="outputs">
             <section class="activity-level" id="activity-level">
                 <h2>Your Activity Level</h2>
                 <ul id="calc-list"></ul>
             </section>
             </section>
             <section class="bmr" id="bmr">
-                <h2>Your Basal Metabolic Rate</h2>
+                <h2>Your Basal Metabolic Rate: </h2>
                 <ul id="bmr-list"></ul>
             </section>
             <section class="goal">
-                <h2>Your Calories Based on Goals</h2>
+                <h2>Your Daily Calories: </h2>
                 <ul id="goal-list"></ul>
             </section>
             <section class="macro">
@@ -107,8 +133,8 @@
         <!-- <footer>FW</footer> -->
     </div>
 
-    <footer>
-        <p>&copy; CS 545 HCI Project - Branden Bulatao, Isabel Sutejo, Tiffany Pak, Sean Payba</p>
+    <footer class="tag">
+        <p>&copy; CS 545 HCI Project - Branden Bulatao, Isabel Sutedjo, Tiffany Pak, Sean Payba</p>
     </footer>
 
     <script>
@@ -145,7 +171,7 @@
             // Get form data
             const age = document.getElementById("age").value;
             const weight = document.getElementById("weight").value;
-            const sex = document.getElementById("gender").value;
+            const sex = document.getElementById("sex").value;
             const height = document.getElementById("height").value;
             const resting = parseFloat(document.getElementById("Resting").value);
             const veryLightActivity = parseFloat(document.getElementById("VeryLightActivity").value);
@@ -161,7 +187,7 @@
             if (checkHours !== 24) {
                 // Create an error message element
                 const errorMessage = document.createElement("p");
-                errorMessage.textContent = "Error: The total hours should be equal to 24. Please adjust your input.";
+                errorMessage.textContent = `Error: The total activity level hours should be equal to 24. Your current total is ${checkHours}. Please adjust your input.`;
                 errorMessage.style.color = "red";  // Set the text color to red, for example
 
                 // Insert the error message next to the calculate button

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Page</title>
+    <link rel="stylesheet" type="text/css" href="../public/css/FAQ.css">
+</head>
+
+<body>
+
+    <h1>Frequently Asked Questions</h1>
+
+    <ul class="navigation">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="FAQ.html">FAQ</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="calculator.html">Calorie Calculator</a></li>
+        <li><a href="mealplan.html">Meal Planner</a></li>
+        <li><a href="visualization.html">Visualization</a></li>
+        <li><a href="foodtracker.html">Food Tracker</a></li>
+    </ul>
+
+    <!-- 
+    ---- TEMPLATE FOR FAQ ITEM ----
+    <div class="faq-item">
+        <div class="question" onclick="toggleAnswer(this)">INSERT QUESTION?</div>
+        <div class="answer">INSERT ANSWER</div>
+    </div>
+   -->
+
+    <div class="faq-item">
+        <div class="question" onclick="toggleAnswer(this)">What is the Mifflin equation?</div>
+        <div class="answer">
+            The Mifflin-St Jeor equation is a formula used to estimate the number of calories your body
+            needs at rest, also known as the Basal Metabolic Rate (BMR). It takes into account your age, gender, weight,
+            and height to provide a more accurate estimate compared to other formulas.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="question" onclick="toggleAnswer(this)">What is Basal Metabolic Rate (BMR)?</div>
+        <div class="answer">
+            Basal Metabolic Rate (BMR) is the amount of energy expended by the body while at rest in a
+            neutrally temperate environment, in the post-absorptive state (meaning that the digestive system is
+            inactive, typically 12 hours after eating). It represents the minimum amount of energy needed to maintain
+            basic physiological functions such as breathing, circulation, cell production, and maintenance of body
+            temperature. <br>
+            In other words, BMR is the number of calories your body requires to perform essential functions while at
+            rest. It's often expressed in calories per day. BMR is influenced by several factors, including age, gender,
+            weight, height, and body composition. Generally, BMR decreases with age and tends to be higher in
+            individuals with more lean muscle mass.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="question" onclick="toggleAnswer(this)">What is an Activity Factor?</div>
+        <div class="answer">
+            The activity factor is a number that is used to multiply with your Basal Metabolic Rate. This helps accounts
+            for extra calories burned throughout the day. It gives a more accurate reading of how much daily Calories
+            one would need. <br>
+            For example, if we take a 150lbs male athlete and a 150lbs average male that are both the same age, they
+            will have the same BMR. However, since the athlete does more activities throughout the day, they burn more
+            calories. They need to replace those lost calories, which is why their caloric needs are higher. The
+            activity level will account for the activities for each person and will help calculate an accurate reading
+            of caloric needs.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="question" onclick="toggleAnswer(this)">How do I contact customer support?</div>
+        <div class="answer">You can contact our customer support team by phone or email. Visit the Contact Us page for
+            more details.</div>
+    </div>
+
+
+    <script>
+        function toggleAnswer(element) {
+            var answer = element.nextElementSibling;
+            answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+
+</body>
+
+</html>
