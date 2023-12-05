@@ -4,17 +4,17 @@ import bcrypt from 'bcrypt';
 
 export const registerUser = async (
     username,
-    emailAddress,
+    email,
     password,
     confirmPassword
 )=>{
     username = checkUsername(username);
-    emailAddress = checkEmail(emailAddress);
+    email = checkEmail(email);
     password = checkPassword(password);
     confirmPassword = checkPassword(confirmPassword);
     
     username = username.trim();
-    emailAddress = emailAddress.trim();
+    email = email.trim();
     password = password.trim();
     confirmPassword = confirmPassword.trim();
     if(password !== confirmPassword){
@@ -25,7 +25,7 @@ export const registerUser = async (
     const userCollection = await users();
     let newUser = { 
         username:username,
-        emailAddress:emailAddress,
+        email:email,
         password: hashedPassword,
         currentGoal: '',
         activity_level: 1,
@@ -40,17 +40,17 @@ export const registerUser = async (
 
 }
 
-export const updateUser = async (username,emailAddress,password)=>{
+export const updateUser = async (username,email,password)=>{
     username = checkUsername(username);
-    emailAddress = checkEmail(emailAddress);
+    email = checkEmail(email);
     password = checkPassword(password);
     username = username.trim();
-    emailAddress = emailAddress.trim();
+    email = email.trim();
     password = password.trim();
     const hashedPassword = await bcrypt.hash(password, 10);
     let updatedUser = {
-        emailAddress:emailAddress,
-        password:password
+        email:email,
+        password:hashedPassword
     };
     const userCollection = await users();
     const newUser = await userCollection.findOneAndReplace(
@@ -65,8 +65,26 @@ export const updateUser = async (username,emailAddress,password)=>{
 
 }
 
-export const saveData = async () => {
-    return 0;
+export const saveData = async (
+    username,
+    currentGoal,
+    activity_level,
+    BMR,
+    caloric_needs) => {
+    const userCollection = await users();
+    let getUser = await userCollection.findOne(username);
+
+    getUser.update(
+        {username: getUser.username},
+        {email: getUser.email},
+        {password: getUser.password},
+        {$set: {
+            currentGoal: currentGoal,
+            activity_level:activity_level,
+            BMR:BMR,
+            caloric_needs:caloric_needs
+        }}
+    )
 }
 
 
