@@ -1,0 +1,18 @@
+{
+  "name": "calorie-calculator",
+  "version": "1.0.0",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Mc-demic Weapons",
+  "license": "ISC",
+  "description": "My lab 10 module",
+  "dependencies": {
+    "email-validator": "^2.0.4",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "mongodb": "^6.3.0"
+  }
+}
