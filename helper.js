@@ -1,49 +1,49 @@
 // const EmailValidator = require('email-validator');
 import * as EmailValidator from 'email-validator';
 
-const exportedMethods = {
- checkLetter(char) {
+
+function checkLetter(char) {
     if (/[a-z]+/gi.test(char)) {
         return true;
     }
     return false;
-},
+}
 
- includesUpper(str) {
+ function includesUpper(str) {
     if (/[A-Z]+/g.test(str)) {
         return true;
     }
     return false;
-},
+}
 
- checkString(str) {
+ function checkString(str) {
     if (!str || typeof str !== `string` || str.trim().length === 0) {
       throw `Error: ${str} is not a valid string`;
     }
     return str.trim();
-},
- includesNum(str) {
+}
+ function includesNum(str) {
     if (/\d+/g.test(str)) {
         return true;
     }
     return false;
-},
- includesSpecial(str) {
+}
+ function includesSpecial(str) {
     if (/[^a-zA-Z0-9]/g.test(str)) {
         return true;
     }
     return false;
-},
+}
 
-checkEmail(str) {
+export const checkEmail = (str) => {
      const email = checkString(str).toLowerCase();
      if (!EmailValidator.validate(email)) {
          throw `Error: ${email} is an invalid email`;
      }
      return email;
-},
+}
 
- checkPassword(str) {
+export const checkPassword = (str) =>{
     const password = checkString(str);
 
     if (password.length < 5 || password.length > 20) {
@@ -53,10 +53,11 @@ checkEmail(str) {
         throw `Error: Password must contain at least one number, one uppercase character, and one special character`;
     }
     return password;
-},
+}
 
- checkUsername(str) {
+export const checkUsername = (str) => {
     let name = checkString(str);
+    console.log(name);
     if (name.length < 3 || name.length > 15) {
         throw `Error: ${name} must be between 3 to 15 characters`;
     }
@@ -67,5 +68,4 @@ checkEmail(str) {
     }
     return name;
 }
-}
-export default exportedMethods
+

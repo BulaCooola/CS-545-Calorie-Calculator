@@ -1,43 +1,50 @@
 //import express, express router as shown in lecture code
 import { Router } from 'express';
 const router = Router();
-import { registerUser } from "../data/users.js";
+import { getDataByName, registerUser } from "../data/users.js";
+import * as path from 'path';
 
 
 router.route('/').get(async (req, res) => {
-  return res.render("/index");
+  res.sendFile(path.resolve('front/index.html'));
+});
+router.route('/index.html').get(async (req, res) => {
+  res.sendFile(path.resolve('front/index.html'));
 });
 
 router
-  .route('/register')
+  .route('/register.html')
   .get(async (req, res) => {
-    if (!req.session.login) {
-      return res.render("register", { title: "Register" })
-    }
-    return res.redirect("/protected");
+      return res.sendFile(path.resolve('front/register.html'));
   })
   .post(async (req, res) => {
     let registrationUser = req.body;
     try {
-      let userCheck = await registerUser(registrationUser.username, registrationUser.password, registrationUser.email, registrationUser.confirm-password);
+
+      let userCheck = await registerUser(registrationUser.username, registrationUser.email, registrationUser.password, registrationUser.confirm_password);
       if (userCheck.insertedUser) {
-        return res.redirect('/profile');
+        return res.sendFile(path.resolve('front/profile.html'));
       }
       else {
-        return res.status(500).render('error: Could not register user');
+        return res.status(500).send('error: Could not register user');
       }
     }
     catch (e) {
-      if (e.code) {
-        return res.status(e.code).render('register', { errors: true, error: e.error })
-      }
-      return res.status(400).render('error: bad');
+      return res.status(400).send('oof');
     }
-    router.route('/logout').get(async (req, res) => {
-      req.session.destroy();
-      res.clearCookie('AuthState', '', { expires: new Date(0) });
-      return res.render("logout");
-    });
+    
+  });
+  router.route('/profile.html').get(async (req, res) => {
+    let user = req.body;
+    let getData = await getDataByName(user.username);
+    res.sendFile(path.resolve('front/profile.html'));
+  });
+  router.route('/calculator.html').get(async (req, res) => {
+    res.sendFile(path.resolve('front/calculator.html'));
+  });
+  router.route('/logout').get(async (req, res) => {
+    req.session.destroy();
+    return res.sendFile(path.resolve('front/logout.html'));
   });
 
 export default router;
