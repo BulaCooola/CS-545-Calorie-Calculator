@@ -34,6 +34,11 @@ router
       }
       return res.status(400).render('error: bad');
     }
+    router.route('/logout').get(async (req, res) => {
+      req.session.destroy();
+      res.clearCookie('AuthState', '', { expires: new Date(0) });
+      return res.render("logout");
+    });
   });
 
 export default router;
