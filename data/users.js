@@ -40,13 +40,28 @@ export const registerUser = async (
 
 }
 
-export const getDataByName = async (username)=>{
+export const updateUser = async (username,emailAddress,password)=>{
     username = checkUsername(username);
+    emailAddress = checkEmail(emailAddress);
+    password = checkPassword(password);
+    username = username.trim();
+    emailAddress = emailAddress.trim();
+    password = password.trim();
+    const hashedPassword = await bcrypt.hash(password, 10);
+    let updatedUser = {
+        emailAddress:emailAddress,
+        password:password
+    };
     const userCollection = await users();
-    const user = await userCollection.find({}).toArray();
-    console.log(user);
-    if (!user) throw 'Error: User not found';
-    return user;
+    const newUser = await userCollection.findOneAndReplace(
+            username,
+            updatedUser,
+            {returnDocument:'after'}
+    );
+    if(!newUser){
+        throw 'could not update user successfully';
+    }
+    return newUser;
 
 }
 
