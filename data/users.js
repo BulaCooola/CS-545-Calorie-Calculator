@@ -51,5 +51,37 @@ export const getDataByName = async (username)=>{
 }
 
 export const saveData = async () => {
-    
+    return 0;
+}
+
+
+export const calcBMR_LBS = async (age, weight, height, sex) => {
+    const weightToKilo = weight / 2.2;
+    const heightToCentimeter = height * 2.54
+
+    let base = 10 * weightToKilo + 6.25 * heightToCentimeter - 5 * age;
+    if (sex == 'male') {
+        base += 5;
+    } else if (sex == 'female') {
+        base -= 161;
+    }
+
+    return base
+}
+export const goalCalories = (weightGoal, goalLBS, bmr, activity_level) => {
+    let calories = bmr * activity_level;
+    if (weightGoal === 'weightMaintain') {
+        // return `Calories for weight mainanence - ${calories.toFixed(0)} Calories`;
+        return calories.toFixed(2);
+    }
+    if (weightGoal === 'weightLoss') {
+        calories = calories - (goalLBS * 500);
+        // return `Calories for weight loss - ${calories.toFixed(0)} Calories`;
+        return calories.toFixed(0);
+    }
+    if (weightGoal === 'weightGain') {
+        calories = calories + (goalLBS * 500);
+        // return `Calories for weight gain - ${calories.toFixed(0)} Calories`;
+        return calories.toFixed(0);
+    }
 }

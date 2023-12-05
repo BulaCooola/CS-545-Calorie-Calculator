@@ -1,0 +1,25 @@
+<h1>My Profile</h1>
+
+<ul class="navigation">
+    <li><a href="/index">Home</a></li>
+    {{!-- <li><a href="/calculator">Calorie Calculator</a></li> --}}
+
+</ul>
+
+<section id="user-profile">
+    <h2>My Profile Information</h2>
+    <p><strong>Username:</strong> johndoe</p>
+    <p><strong>Email:</strong> john.doe@example.com</p>
+    <!-- Add more user-specific information here -->
+
+    <h2>Edit Profile</h2>
+    <form action="update_profile.php" method="POST">
+        <label for="new-email">New Email:</label>
+        <input type="email" id="new-email" name="new-email"><br>
+
+        <label for="new-password">New Password:</label>
+        <input type="password" id="new-password" name="new-password"><br>
+
+        <input type="submit" value="Update Profile">
+    </form>
+</section>

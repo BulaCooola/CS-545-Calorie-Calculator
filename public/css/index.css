@@ -175,6 +175,15 @@ aside.outputs {
     justify-content: center;
     /* align-content: center; */
     padding: 20px;
+
+    & h2.results {
+        text-decoration: underline;
+        margin: 20px 0px 0px 0px;
+        padding: 0px;
+        text-underline-offset: 1px;
+        text-underline-position: below;
+        font-weight: 600px;
+    }
 }
 
 main.calorie-calculator {

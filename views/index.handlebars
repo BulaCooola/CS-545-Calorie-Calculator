@@ -1,0 +1,136 @@
+<h1>Calorie Counter</h1>
+<p class="h1">Easily calculate your calories to achieve your weight goals!</p>
+
+<ul class="navigation">
+    <li><a href="/index">Home</a></li>
+    <li><a href="/FAQ">FAQ</a></li>
+    <li><a href="/register">Register</a></li>
+    <li><a href="/profile">Profile</a></li>
+    {{!-- <li><a href="calculator.html">Calorie Calculator</a></li> --}}
+    <!-- <li><a href="mealplan.html">Meal Planner</a></li> -->
+    <!-- <li><a href="visualization.html">Visualization</a></li> -->
+    <!-- <li><a href="foodtracker.html">Food Tracker</a></li> -->
+</ul>
+
+<div class="grid">
+    <header class="guide">
+        <section>
+            <h2>Activity Level Guide:</h2>
+            <p>In order to calculate the estimate amount of calories burned, we need to quantify the amount of hours
+                spent on different activities on the average day. <br> <br> To get an accurate calculation, follow the
+                guidelines below:</p>
+            <h3>Resting:</h3>
+            <p>Sleeping, non-movement</p>
+            <h3>Very Light Activity:</h3>
+            <p>Standing, sitting, etc. Example: on a couch watching netflix, on a computer, sitting in class, ...</p>
+            <h3>Light Activity:</h3>
+            <p>Walking, stretching, activities with some movement. Example: shopping, doing errands/chores, sporadic
+                activities</p>
+            <h3>Moderate Activity:</h3>
+            <p>Traditional weight lifting, jogging, occasional time in gym</p>
+            <h3>Heavy Activity:</h3>
+            <p>Sprints, intense cardio, very high intensity workouts</p>
+        </section>
+    </header>
+    <!-- <aside>teset</aside> -->
+    <main class="calorie-calculator">
+        <h1 class="main-h1">OUR CALORIE CALCULATOR</h1>
+        <form id="calculate_calories_form" method="POST" onsubmit="activity_level(event)">
+
+            <h2>Mifflin Calculator</h2>
+            <p>Fill in the information below to receive your results:</p>
+
+            <label for="age">
+                Age:
+                <input type="number" id="age" name="age" required>
+            </label>
+
+            <label for="sex">Sex:
+                <select id="sex" name="sex" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select><br>
+            </label>
+
+            <label for="weight">
+                Weight (lbs):
+                <input type="number" id="weight" name="weight" required>
+            </label>
+
+            <label for="height">
+                Height (in):
+                <input type="number" id="height" name="height" required>
+            </label>
+
+            <h2>Activity Level: </h2>
+            <p class="small">(Hours MUST add up to 24 hours) </p>
+            <p class="small">Refer to Activity Level Guide for help!</p>
+
+            <label for="Resting">
+                Resting (hours):
+                <input type="number" id="Resting" name="Resting" required>
+            </label>
+
+            <label for="VeryLightActivity">
+                Very Light Activity (hours):
+                <input type="number" id="VeryLightActivity" name="VeryLightActivity" required>
+            </label>
+
+            <label for="LightActivity">
+                Light Activity (hours):
+                <input type="number" id="LightActivity" name="LightActivity" required>
+            </label>
+
+            <label for="ModerateActivity">
+                Moderate Activity (hours):
+                <input type="number" id="ModerateActivity" name="ModerateActivity" required>
+            </label>
+
+            <label for="HeavyActivity">
+                Heavy Activity (hours):
+                <input type="number" id="HeavyActivity" name="HeavyActivity" required>
+            </label> <br>
+
+            <label for="weightGoal">
+                Weight Goal:
+                <select id="weightGoal" name="weightGoal" required>
+                    <option value="weightLoss">Weight Loss</option>
+                    <option value="weightMaintain">Weight Maintanence</option>
+                    <option value="weightGain">Weight Gain</option>
+                </select>
+            </label>
+
+            <label for="goalLBS">
+                Goal lbs (per week):
+                <input type="number" id="goalLBS" name="goalLBS" required>
+            </label>
+
+            <input type="submit" id="button" value="Calculate">
+            <input type="submit" value="Save to Profile">
+        </form>
+    </main>
+    <aside class="outputs">
+        <h2 class="results">Your Results are:</h2>
+        <section class="activity-level" id="activity-level">
+            <h2>Your Activity Level</h2>
+            <ul id="calc-list">{{activityLevel}}</ul>
+        </section>
+        </section>
+        <section class="bmr" id="bmr">
+            <h2>Your Basal Metabolic Rate: </h2>
+            <ul id="bmr-list">{{bmr}}</ul>
+        </section>
+        <section class="goal">
+            <h2>Your Daily Calories: </h2>
+            <ul id="goal-list">{{goalCalories}}</ul>
+        </section>
+        <section class="macro">
+            <h2>Macros</h2>
+            <ul id="macro-list"></ul>
+        </section>
+    </aside>
+
+    <!-- <footer>FW</footer> -->
+</div>
+
+<script>activity_level(event)</script>

@@ -32,6 +32,12 @@ h1 {
     align-content: center;
 }
 
+h2 {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
 /* ********************** NAVIGATION ************************* */
 ul.navigation {
     display: flex;
@@ -107,10 +113,14 @@ a:hover::after {
 .faq-item {
     margin: 10px 20px 10px 20px;
     & .question {
+        display: flex;
         font-weight: 600;
         font-size: 32px;
     }
     & .answer {
+        display: none;
+        justify-content: center;
+        align-content: center;
         margin-left: 20px;
         font-size: 18px;
     }
