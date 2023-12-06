@@ -6,6 +6,7 @@
     <li><a href="/FAQ">FAQ</a></li>
     <li><a href="/register">Register</a></li>
     <li><a href="/profile">Profile</a></li>
+    <li><a href="/login">Login</a></li>
     {{!-- <li><a href="calculator.html">Calorie Calculator</a></li> --}}
     <!-- <li><a href="mealplan.html">Meal Planner</a></li> -->
     <!-- <li><a href="visualization.html">Visualization</a></li> -->
@@ -35,9 +36,9 @@
     <!-- <aside>teset</aside> -->
     <main class="calorie-calculator">
         <h1 class="main-h1">OUR CALORIE CALCULATOR</h1>
-        <form id="calculate_calories_form" method="POST" onsubmit="activity_level(event)">
+        <form id="calculate_calories_form" action="/index" method="POST" onsubmit="validate_form('calculate_calories_form')">
 
-            <h2>Mifflin Calculator</h2>
+            <h2 class="main">Mifflin Calculator</h2>
             <p>Fill in the information below to receive your results:</p>
 
             <label for="age">
@@ -62,12 +63,12 @@
                 <input type="number" id="height" name="height" required>
             </label>
 
-            <h2>Activity Level: </h2>
+            <h2 class="main">Activity Level: </h2>
             <p class="small">(Hours MUST add up to 24 hours) </p>
             <p class="guider">Refer to Activity Level Guide for help!</p>
 
             <label for="Resting">
-                Resting (hours):
+                Resting/Sleeping (hours):
                 <input type="number" id="Resting" name="Resting" required>
             </label>
 
@@ -105,9 +106,98 @@
                 <input type="number" id="goalLBS" name="goalLBS" required>
             </label>
 
-            <input type="submit" id="button" value="Calculate">
-            <input type="submit" value="Save to Profile">
+            {{#if error}}
+                <p class="error">{{error}}</p>
+            {{/if}}
+
+            <input type="submit" id="button1" name="button" value="Calculate">
+            <input type="submit" id="button2" name="button" value="Save to Profile">
+
+            <p class="small">No account? <a href="/register">Click here to register!</a></p>
+            <p>Need Help? <a href='/faq'>Click here to open FAQ!</a></p>
         </form>
+
+        <section class="example">
+            <h2 class="example">Example Activity Factor Configurations</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Person</th>
+                        <th>Resting/Sleeping</th>
+                        <th>Very Light Activities</th>
+                        <th>Light Activities</th>
+                        <th>Moderate Activities</th>
+                        <th>Heavy Activities</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Student who walks to school, studies, and works out 1 hour a day</td>
+                        <td><a class="hours">7 Hours</a></td>
+                        <td><a class="hours">14 Hours</a></td>
+                        <td><a class="hours">2 Hours</a></td>
+                        <td><a class="hours">1 hour</a></td>
+                        <td><a class="hours">0 hours</a></td>
+                    </tr>
+                    <tr>
+                        <td>Student athlete who works out multiple times a day</td>
+                        <td><a class="hours">7 Hours</a></td>
+                        <td><a class="hours">12 Hours</a></td>
+                        <td><a class="hours">2 Hours</a></td>
+                        <td><a class="hours">2 hour</a></td>
+                        <td><a class="hours">1 hours</a></td>
+                    </tr>
+                    <tr>
+                        <td>Person who Workouts 1-3 times/week</td>
+                        <td><a class="hours">7 Hours</a></td>
+                        <td><a class="hours">12 Hours</a></td>
+                        <td><a class="hours">5 Hours</a></td>
+                        <td><a class="hours">0 hour</a></td>
+                        <td><a class="hours">0 hours</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="level-of-activity">
+            <h2 class="example">Table of Activity Factors</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Level of Activity</th>
+                        <th>Example</th>
+                        <th>Activity Factor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sedentary</td>
+                        <td>Little to no exercise, such as a desk job with no additional physical activity</td>
+                        <td>1.2</td>
+                    </tr>
+                    <tr>
+                        <td>Lightly Active</td>
+                        <td>Light exercise 1-2 days/week</td>
+                        <td>1.375</td>
+                    </tr>
+                    <tr>
+                        <td>Moderately Active</td>
+                        <td>Moderate exercise 3-5 days/week</td>
+                        <td>1.55</td>
+                    </tr>
+                    <tr>
+                        <td>Very Active</td>
+                        <td>Hard exercise 6-7 days/week</td>
+                        <td>1.725</td>
+                    </tr>
+                    <tr>
+                        <td>Extremely Active</td>
+                        <td>Hard daily exercise and physical job or two times a day training</td>
+                        <td>1.9</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
 
     </main>
 
@@ -123,17 +213,14 @@
             <p id="bmr-list">{{bmr}}</p>
         </section>
         <section class="goal">
-            <h2>Your Daily Calories: </h2>
+            <h2>Your Estimated Daily Calories: </h2>
             <p id="goal-list">{{goalCalories}}</p>
         </section>
-        <section class="macro">
+        {{!-- <section class="macro">
             <h2>Macros</h2>
             <p id="macro-list"></p>
-        </section>
+        </section> --}}
     </aside>
-
 
     <!-- <footer>FW</footer> -->
 </div>
-
-<script>activity_level(event)</script>
