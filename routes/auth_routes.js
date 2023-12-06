@@ -73,7 +73,15 @@ router.route('/index')
     } 
     if (req.body.button === 'Save to Profile') {
       try {
-
+        const BMR = await calcBMR_LBS(age, weight, height, sex);
+        const activity_Factor = await activityFactor(resting, veryLightActivity, lightActivity, moderateActivity, heavyActivity)
+        const caloricNeeds = await goalCalories(weightGoal, goalLBS, BMR, activity_Factor);
+        
+        if (req.session.user) {
+          const saved = await saveData(req.session.user.username, weightGoal, activity_factor,x)
+        } else {
+          res.status(400).render('error', {error: 'No account registered'})
+        }
       } catch(e) {
 
       }
@@ -85,16 +93,49 @@ router.route('/faq').get(async (req, res) => {
   res.render('faq', { title: 'FAQ page' })
 });
 
-// router.route('/indexStatic')
-//   .get(async (req, res) => {
-//     return res.sendFile(path.resolve('front/index.html'));
-//   }).post(async (req, res) => {
-//     // console.log(req.body)
-//     return res.sendFile(path.resolve('front/index.html'));
-//   });
+router.route('/login')
+  .get(async (req, res) => {
+    res.render('login');
+  })
+  .post(async (req, res) => {
+    const { emailAddress, password } = req.body;
 
-router
-  .route('/register')
+    if (!emailAddress || !password) {
+      return res.status(400).render('login', { error: 'All fields are required.' })
+    }
+
+    if (!(isEmail(emailAddress.toLowerCase()))) {
+      return res.status(400).render('login', { error: 'Invalid Email Address or Password' })
+    }
+
+    if (typeof password !== 'string' || !(isStrongPassword(password))) {
+      return res.status(400).render('login', { error: 'Invalid Email Address or Password' });
+    }
+
+    try {
+      const user = await methods.loginUser(emailAddress.toLowerCase(), password);
+
+      if (user) {
+        req.session.user = {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          emailAddress: user.emailAddress.toLowerCase(),
+          role: user.role
+        }
+      }
+
+      if (req.session.user.role === 'admin') {
+        res.redirect('/admin');
+      } else {
+        res.redirect('/protected');
+      }
+    } catch (error) {
+      // console.error(error);
+      return res.status(400).render('login', { error: 'Invalid Email Address or Password' })
+    }
+  });
+
+router.route('/register')
   .get(async (req, res) => {
     // return res.sendFile(path.resolve('front/register.html'));
     res.render('register');

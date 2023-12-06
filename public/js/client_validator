@@ -1,5 +1,3 @@
-import { verify } from "crypto";
-
 // ERROR CONSIDERATION
 function calcBMR(age, weight, height, sex) {
     const weightToKilo = weight / 2.2;
@@ -160,32 +158,38 @@ function validateInputs(formid) {
 //     gwLog.appendChild(gw);
 // }
 
-const resultsTemplate = Handlebars.compile(document.getElementById('resultsTemplate').innerHTML);
+function validateformLogin(formId) {
+    const form = document.getElementById(formId);
 
-function calculateCalories() {
-    // Collect form data
-    const formData = {
-        weight: document.getElementById('weight').value,
-        height: document.getElementById('height').value,
-        // Add other form fields as needed
+    form.addEventListener('submit', (event) => {
+        if (!validateInputs2(formId)) {
+            event.preventDefault();
+        }
+    });
+}
+
+function validateInputs2(formId) {
+    const form = document.getElementById(formId);
+
+    const emailAddressInput = form.querySelector('#emailAddressInput');
+    const passwordInput = form.querySelector('#passwordInput');
+
+    if (!emailAddressInput || !passwordInput) {
+        alert('All fields must be provided.');
+        return false;
+    }
+
+    // regex from https://www.abstractapi.com/tools/email-regex-guide
+    email_regex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    if (!(email_regex.test(emailAddressInput))) {
+        alert('Invalid Email Address or Password');
+        return false;
     };
 
-    // Send the form data to the server using AJAX
-    fetch('/index', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-    })
-        .then(response => response.json())
-        .then(data => {
-            // Use Handlebars to render the calculated results
-            const resultsSection = document.getElementById('results');
-            resultsSection.innerHTML = resultsTemplate({ calories: data.calories });
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Handle errors if needed
-        });
+    // regex from https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
+    password_regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!(password_regex.test(passwordInput))) {
+        alert('Invalid Email Address or Password');
+        return false;
+    }
 }
