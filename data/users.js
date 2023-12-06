@@ -118,3 +118,11 @@ export const goalCalories = (weightGoal, goalLBS, bmr, activity_level) => {
         return calories.toFixed(0);
     }
 }
+export const activityFactor = (r, vla, la, ma, ha) => {
+    if (r < 0 || vla < 0 || la < 0 || ma < 0 || ha < 0) throw `Error: Activity Factor inputs must be positive.`
+    if (r + vla + la + ma + ha !== 24) {
+        throw `Error: Total hours must equal 24. Your current input is ${r + vla + la + ma + ha}`;
+    }
+    const activityFactor = (r * 1 + vla * 1.2 + la * 2.5 + ma * 5 + ha * 7) / 24
+    return activityFactor
+}

@@ -1,14 +1,12 @@
 //import express, express router as shown in lecture code
 import { Router } from 'express';
 const router = Router();
-import { registerUser, calcBMR_LBS, goalCalories, updateUser } from "../data/users.js";
+import { registerUser, calcBMR_LBS, goalCalories, updateUser, activityFactor } from "../data/users.js";
 import * as path from 'path';
 
 
 router.route('/')
   .get(async (req, res) => {
-    // res.sendFile(path.resolve('front/index.html'));
-    // res.render('index');
     res.redirect('/index')
   });
 
@@ -30,19 +28,56 @@ router.route('/index')
     const weightGoal = userData.weightGoal;
     const goalLBS = parseInt(userData.goalLBS);
 
-    console.log(req)
-    try {
-      const BMR = await calcBMR_LBS(age, weight, height, sex);
-      const activityFactor = (resting * 1 + veryLightActivity * 1.2 + lightActivity * 2.5 + moderateActivity * 5 + heavyActivity * 7) / 24
-      const caloricNeeds = await goalCalories(weightGoal, goalLBS, BMR, activityFactor);
-      // console.log(activityFactor);
-      res.render('index', { activityLevel: `${activityFactor.toFixed(2)}`, bmr: `${BMR.toFixed(0)} Calories`, goalCalories: `${caloricNeeds} Calories` });
-    } catch (e) {
-      res.render('error', { error: e });
+
+    if (!age || !weight || !sex || !height || resting < 0 || veryLightActivity < 0 || lightActivity < 0 || moderateActivity < 0 || heavyActivity < 0 ) {
+      return res.status(400).render('index', { error: 'All fields are required.' });
     }
-    // res.json({goalCalories: caloricNeeds})
-    // res.render('index', {activityLevel: activityFactor, bmr: BMR, goalCalories: caloricNeeds});
-    // res.redirect('/index')
+    if (age < 0) {
+      return res.status(400).render('index', { error: 'Age cannot be below 0' });
+    }
+    if (age > 150) {
+      return res.status(400).render('index', { error: 'Age too high. Please provide valid age' });
+    }
+    if (weight < 50 || weight > 1000) {
+      return res.status(400).render('index', { error: 'Please provide a valid weight' });
+    }
+    if (height < 0 || height > 107) {
+      return res.status(400).render('index', { error: 'Height is below 0 or is too tall (unless you are taller than the tallest person in the world)' });
+
+    }
+    if (resting < 0 || veryLightActivity < 0 || lightActivity < 0 || moderateActivity < 0 || heavyActivity < 0) {
+      return res.status(400).render('index', { error: 'Activity level inputs cannot be below 0' });
+    }
+    const activityHours = resting + veryLightActivity + lightActivity + moderateActivity + heavyActivity;
+    if (activityHours !== 24) {
+      return res.status(400).render('index', { error: `The total hours should be equal to 24. Your current hours inputted is ${activityHours}. Please adjust your input.` });
+
+    }
+    if (weightGoal < -4 || weightGoal > 4) {
+      return res.status(400).render('index', { error: 'Weight Goal is too unrealistic.' });
+
+    }
+
+    console.log(req.session)
+    // Form Buttons
+    if (req.body.button === 'Calculate') {
+      try {
+        const BMR = await calcBMR_LBS(age, weight, height, sex);
+        const activity_Factor = await activityFactor(resting, veryLightActivity, lightActivity, moderateActivity, heavyActivity)
+        const caloricNeeds = await goalCalories(weightGoal, goalLBS, BMR, activity_Factor);
+  
+        res.render('index', { activityLevel: `${activity_Factor.toFixed(2)}`, bmr: `${BMR.toFixed(0)} Calories`, goalCalories: `${caloricNeeds} Calories` });
+      } catch (e) {
+        res.render('error', { error: e });
+      }
+    } 
+    if (req.body.button === 'Save to Profile') {
+      try {
+
+      } catch(e) {
+
+      }
+    }
   });
 
 router.route('/faq').get(async (req, res) => {
@@ -50,13 +85,13 @@ router.route('/faq').get(async (req, res) => {
   res.render('faq', { title: 'FAQ page' })
 });
 
-router.route('/indexStatic')
-  .get(async (req, res) => {
-    return res.sendFile(path.resolve('front/index.html'));
-  }).post(async (req, res) => {
-    console.log(req.body)
-    return res.sendFile(path.resolve('front/index.html'));
-  });
+// router.route('/indexStatic')
+//   .get(async (req, res) => {
+//     return res.sendFile(path.resolve('front/index.html'));
+//   }).post(async (req, res) => {
+//     // console.log(req.body)
+//     return res.sendFile(path.resolve('front/index.html'));
+//   });
 
 router
   .route('/register')
@@ -83,9 +118,9 @@ router
 router.route('/profile')
   .get(async (req, res) => {
     // res.sendFile(path.resolve('front/profile.html'));
-    res.render('profile', {user:req.session.user});
+    res.render('profile', { user: req.session.user });
   });
-  
+
 router.route('/calculator.html').get(async (req, res) => {
   // res.sendFile(path.resolve('front/calculator.html'));
   res.render('index')
