@@ -1,7 +1,7 @@
 //import express, express router as shown in lecture code
 import { Router } from 'express';
 const router = Router();
-import { registerUser, calcBMR_LBS, goalCalories, updateUser, activityFactor } from "../data/users.js";
+import { registerUser,loginUser, calcBMR_LBS, goalCalories, updateUser,saveData, activityFactor } from "../data/users.js";
 import * as path from 'path';
 
 
@@ -78,12 +78,14 @@ router.route('/index')
         const caloricNeeds = await goalCalories(weightGoal, goalLBS, BMR, activity_Factor);
         
         if (req.session.user) {
-          const saved = await saveData(req.session.user.username, weightGoal, activity_factor,x)
+          const saved = await saveData(req.session.user.username, weightGoal, activity_Factor,BMR, caloricNeeds)
+          req.session.user = saved;
+          res.redirect('/profile');
         } else {
           res.status(400).render('error', {error: 'No account registered'})
         }
       } catch(e) {
-
+        res.render('error', { error: e });
       }
     }
   });
@@ -98,41 +100,24 @@ router.route('/login')
     res.render('login');
   })
   .post(async (req, res) => {
-    const { emailAddress, password } = req.body;
-
-    if (!emailAddress || !password) {
-      return res.status(400).render('login', { error: 'All fields are required.' })
-    }
-
-    if (!(isEmail(emailAddress.toLowerCase()))) {
-      return res.status(400).render('login', { error: 'Invalid Email Address or Password' })
-    }
-
-    if (typeof password !== 'string' || !(isStrongPassword(password))) {
-      return res.status(400).render('login', { error: 'Invalid Email Address or Password' });
-    }
-
-    try {
-      const user = await methods.loginUser(emailAddress.toLowerCase(), password);
-
-      if (user) {
-        req.session.user = {
-          firstName: user.firstName,
-          lastName: user.lastName,
-          emailAddress: user.emailAddress.toLowerCase(),
-          role: user.role
-        }
+    const inputs = req.body;
+    try{
+      if(!inputs.emailAddressInput || !inputs.passwordInput){
+        return res.status(400).render('login', {error: "Username or password is incorrect"}); 
       }
-
-      if (req.session.user.role === 'admin') {
-        res.redirect('/admin');
-      } else {
-        res.redirect('/protected');
-      }
-    } catch (error) {
-      // console.error(error);
-      return res.status(400).render('login', { error: 'Invalid Email Address or Password' })
+    }catch(e){
+      return res.status(400).render('login', {error: e});
     }
+
+    try{
+      let checkLog = await loginUser(inputs.emailAddressInput, inputs.passwordInput);
+      req.session.user = checkLog;
+      res.redirect('/profile');
+    }catch(e){
+      return res.status(400).render('login', {error: e});
+    }
+
+  
   });
 
 router.route('/register')
@@ -145,7 +130,7 @@ router.route('/register')
     try {
       let userCheck = await registerUser(registrationUser.username, registrationUser.email, registrationUser.password, registrationUser.confirm_password);
       if (userCheck.insertedUser) {
-        return res.redirect('/profile');
+        return res.redirect('/login');
       }
       else {
         return res.status(500).send('error: Could not register user');

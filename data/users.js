@@ -1,3 +1,4 @@
+import { get } from 'http';
 import {users} from '../config/mongoCollections.js';
 import {checkUsername, checkEmail, checkPassword} from '../helper.js'
 import bcrypt from 'bcrypt';
@@ -39,6 +40,29 @@ export const registerUser = async (
     return {insertedUser:true};
 
 }
+export const loginUser = async (email, password) => {
+    email = checkEmail(email);
+    password = checkPassword(password);
+    const userCollection = await users();
+    const findEmail = await userCollection.findOne({email: email});
+    if(!findEmail){
+        throw 'Either the email address or password is invalid';
+    }
+
+    let compareEmail = false;
+    compareEmail = await bcrypt.compare(password, findEmail.password);
+    if(!compareEmail){
+        throw 'Either the email address or password is invalid';
+    }
+    return{
+        username:findEmail.username,
+        email:findEmail.email,
+        currentGoal:findEmail.currentGoal,
+        BMR:findEmail.BMR,
+        activity_level:findEmail.activity_level,
+        caloric_needs:findEmail.caloric_needs
+    };
+}
 
 export const updateUser = async (username,email,password)=>{
     username = checkUsername(username);
@@ -72,19 +96,18 @@ export const saveData = async (
     BMR,
     caloric_needs) => {
     const userCollection = await users();
-    let getUser = await userCollection.findOne(username);
-
-    getUser.update(
-        {username: getUser.username},
-        {email: getUser.email},
-        {password: getUser.password},
+    const updatedUser = await userCollection.findOneAndUpdate(
+        {username: username},
         {$set: {
             currentGoal: currentGoal,
             activity_level:activity_level,
             BMR:BMR,
             caloric_needs:caloric_needs
-        }}
+        }},
+        {returnDocument:'after'}
     )
+
+    return updatedUser;
 }
 
 
