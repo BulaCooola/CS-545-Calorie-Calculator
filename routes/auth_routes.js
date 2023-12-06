@@ -30,11 +30,12 @@ router.route('/index')
     const weightGoal = userData.weightGoal;
     const goalLBS = parseInt(userData.goalLBS);
 
+    console.log(req)
     try {
       const BMR = await calcBMR_LBS(age, weight, height, sex);
       const activityFactor = (resting * 1 + veryLightActivity * 1.2 + lightActivity * 2.5 + moderateActivity * 5 + heavyActivity * 7) / 24
       const caloricNeeds = await goalCalories(weightGoal, goalLBS, BMR, activityFactor);
-      console.log(activityFactor);
+      // console.log(activityFactor);
       res.render('index', { activityLevel: `${activityFactor.toFixed(2)}`, bmr: `${BMR.toFixed(0)} Calories`, goalCalories: `${caloricNeeds} Calories` });
     } catch (e) {
       res.render('error', { error: e });

@@ -64,7 +64,7 @@
 
             <h2>Activity Level: </h2>
             <p class="small">(Hours MUST add up to 24 hours) </p>
-            <p class="small">Refer to Activity Level Guide for help!</p>
+            <p class="guider">Refer to Activity Level Guide for help!</p>
 
             <label for="Resting">
                 Resting (hours):
@@ -108,27 +108,30 @@
             <input type="submit" id="button" value="Calculate">
             <input type="submit" value="Save to Profile">
         </form>
+
     </main>
+
     <aside class="outputs">
         <h2 class="results">Your Results are:</h2>
         <section class="activity-level" id="activity-level">
             <h2>Your Activity Level</h2>
-            <ul id="calc-list">{{activityLevel}}</ul>
+            <p id="calc-list">{{activityLevel}}</p>
         </section>
         </section>
         <section class="bmr" id="bmr">
             <h2>Your Basal Metabolic Rate: </h2>
-            <ul id="bmr-list">{{bmr}}</ul>
+            <p id="bmr-list">{{bmr}}</p>
         </section>
         <section class="goal">
             <h2>Your Daily Calories: </h2>
-            <ul id="goal-list">{{goalCalories}}</ul>
+            <p id="goal-list">{{goalCalories}}</p>
         </section>
         <section class="macro">
             <h2>Macros</h2>
-            <ul id="macro-list"></ul>
+            <p id="macro-list"></p>
         </section>
     </aside>
+
 
     <!-- <footer>FW</footer> -->
 </div>

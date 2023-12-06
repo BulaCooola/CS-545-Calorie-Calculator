@@ -1,3 +1,4 @@
+// ERROR CONSIDERATION
 function calcBMR(age, weight, height, sex) {
     const weightToKilo = weight / 2.2;
     const heightToCentimeter = height * 2.54
@@ -14,15 +15,18 @@ function calcBMR(age, weight, height, sex) {
 function goals(weightGoal, goalLBS, bmr, activity_level) {
     let calories = bmr * activity_level;
     if (weightGoal === 'weightMaintain') {
-        return `Calories for weight mainanence - ${calories.toFixed(0)} Calories`;
+        return calories.toFixed(0);
+        // return `Calories for weight mainanence - ${calories.toFixed(0)} Calories`;
     }
     if (weightGoal === 'weightLoss') {
         calories = calories - (goalLBS * 500);
-        return `Calories for weight loss - ${calories.toFixed(0)} Calories`;
+        return calories.toFixed(0);
+        // return `Calories for weight loss - ${calories.toFixed(0)} Calories`;
     }
     if (weightGoal === 'weightGain') {
         calories = calories + (goalLBS * 500);
-        return `Calories for weight gain - ${calories.toFixed(0)} Calories`;
+        // return `Calories for weight gain - ${calories.toFixed(0)} Calories`;
+        return calories.toFixed(0);
     }
 }
 function activity_level(event) {
@@ -66,29 +70,29 @@ function activity_level(event) {
         // Add more calculations or actions here
     }
 
-    // VALUES TO DISPLAY
-    const activityFactor = (formData.resting * 1 + formData.veryLightActivity * 1.2 + formData.lightActivity * 2.5 + formData.moderateActivity * 5 + formData.heavyActivity * 7) / 24
-    const base = calcBMR(formData.age, formData.weight, formData.height, formData.sex);
-    const goalCals = goals(formData.weightGoal, formData.goalLBS, formData.base, formData.activityFactor);
+    // // VALUES TO DISPLAY
+    // const activityFactor = (formData.resting * 1 + formData.veryLightActivity * 1.2 + formData.lightActivity * 2.5 + formData.moderateActivity * 5 + formData.heavyActivity * 7) / 24
+    // const base = calcBMR(formData.age, formData.weight, formData.height, formData.sex);
+    // const goalCals = goals(formData.weightGoal, formData.goalLBS, formData.base, formData.activityFactor);
 
-    // DISPLAY
-    const calc = document.getElementById('calc-list');
-    calc.innerHTML = "";
-    const aF = document.createElement("li");
-    aF.textContent = `Activity Factor- ${activityFactor.toFixed(2)} `
-    calc.appendChild(aF);
+    // // DISPLAY
+    // const calc = document.getElementById('calc-list');
+    // calc.innerHTML = "";
+    // const aF = document.createElement("li");
+    // aF.textContent = `Activity Factor- ${activityFactor.toFixed(2)} `
+    // calc.appendChild(aF);
 
-    const bmr = document.createElement("li");
-    const bmrLog = document.getElementById('bmr-list');
-    bmrLog.innerHTML = "";
-    bmr.textContent = `Basal Metabolic Rate- ${base.toFixed(0)} Calories`
-    bmrLog.appendChild(bmr)
+    // const bmr = document.createElement("li");
+    // const bmrLog = document.getElementById('bmr-list');
+    // bmrLog.innerHTML = "";
+    // bmr.textContent = `Basal Metabolic Rate- ${base.toFixed(0)} Calories`
+    // bmrLog.appendChild(bmr)
 
-    const gw = document.createElement("li");
-    const gwLog = document.getElementById('goal-list');
-    gwLog.innerHTML = "";
-    gw.textContent = `${goalCals}`;
-    gwLog.appendChild(gw);
+    // const gw = document.createElement("li");
+    // const gwLog = document.getElementById('goal-list');
+    // gwLog.innerHTML = "";
+    // gw.textContent = `${goalCals}`;
+    // gwLog.appendChild(gw);
 }
 
 const resultsTemplate = Handlebars.compile(document.getElementById('resultsTemplate').innerHTML);
