@@ -8,12 +8,12 @@
 
 <section id="user-profile">
     <h2>My Profile Information</h2>
-    <p><strong>Username:</strong> johndoe</p>
-    <p><strong>Email:</strong> john.doe@example.com</p>
+    <p><strong>Username:</strong> {{user.username}}</p>
+    <p><strong>Email:</strong> {{user.email}}</p>
     <!-- Add more user-specific information here -->
 
     <h2>Edit Profile</h2>
-    <form action="update_profile.php" method="POST">
+    <form action="update_profile.html" method="POST">
         <label for="new-email">New Email:</label>
         <input type="email" id="new-email" name="new-email"><br>
 

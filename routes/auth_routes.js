@@ -1,7 +1,7 @@
 //import express, express router as shown in lecture code
 import { Router } from 'express';
 const router = Router();
-import { getDataByName, registerUser, calcBMR_LBS, goalCalories } from "../data/users.js";
+import { registerUser, calcBMR_LBS, goalCalories, updateUser } from "../data/users.js";
 import * as path from 'path';
 
 
@@ -83,8 +83,9 @@ router
 router.route('/profile')
   .get(async (req, res) => {
     // res.sendFile(path.resolve('front/profile.html'));
-    res.render('profile');
+    res.render('profile', {user:req.session.user});
   });
+  
 router.route('/calculator.html').get(async (req, res) => {
   // res.sendFile(path.resolve('front/calculator.html'));
   res.render('index')
