@@ -287,3 +287,45 @@ button:after {
     grid-column: 1/4;
   }
 }
+
+aside.outputs {
+  /* display: center; */
+  justify-content: center;
+  padding: 20px;
+
+  & h2.results {
+      text-decoration: underline;
+      font-size: 24pt;
+      margin: 20px 0px 0px 0px;
+      padding: 0px;
+      text-underline-offset: 1px;
+      text-underline-position: below;
+      font-weight: 600px;
+  }
+  & h2 {
+      text-decoration: underline;
+      font-size: 14pt;
+      margin: 0px;
+      padding: 0px;
+      text-underline-offset: 1px;
+      text-underline-position: below;
+      font-weight: 600px;
+  }
+
+  & .activity-level, .bmr, .goal, .macro {
+      max-width: 800px;
+      margin: 10px auto;
+      background-color: #ffffff;
+      padding: 20px 20px 20px 20px;
+      border: 10px double #000000;
+      border-radius: 20px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+      float: left;
+      /* width: 25%; */
+  
+      & p {
+          font-weight: 600;
+          /* list-style-type: none; */
+      }
+  }
+}
