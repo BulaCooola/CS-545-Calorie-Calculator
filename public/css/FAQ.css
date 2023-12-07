@@ -177,6 +177,9 @@ a:hover::after {
         font-size: 18px;
     }
 }
+.faq-item:hover {
+    cursor: pointer;
+}
 
 section.TDEE-table {
     & table {

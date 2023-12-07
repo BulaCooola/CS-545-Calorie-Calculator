@@ -95,14 +95,19 @@ export const saveData = async (
     activity_level,
     BMR,
     caloric_needs) => {
+
+    // activity_level = activity_level.toFixed(2);
+    // BMR = BMR.toFixed(0);
+    // caloric_needs = caloric_needs.toFixed(0);
+
     const userCollection = await users();
     const updatedUser = await userCollection.findOneAndUpdate(
         {username: username},
         {$set: {
             currentGoal: currentGoal,
             activity_level:activity_level,
-            BMR:BMR,
-            caloric_needs:caloric_needs
+            BMR: `${BMR} Calories`,
+            caloric_needs: `${caloric_needs} Calories`
         }},
         {returnDocument:'after'}
     )
@@ -122,7 +127,7 @@ export const calcBMR_LBS = async (age, weight, height, sex) => {
         base -= 161;
     }
 
-    return base
+    return base;
 }
 export const goalCalories = (weightGoal, goalLBS, bmr, activity_level) => {
     let calories = bmr * activity_level;
@@ -147,5 +152,5 @@ export const activityFactor = (r, vla, la, ma, ha) => {
         throw `Error: Total hours must equal 24. Your current input is ${r + vla + la + ma + ha}`;
     }
     const activityFactor = (r * 1 + vla * 1.2 + la * 2.5 + ma * 5 + ha * 7) / 24
-    return activityFactor
+    return activityFactor;
 }

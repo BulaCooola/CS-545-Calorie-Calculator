@@ -328,6 +328,26 @@ main.calorie-calculator {
     padding-top: 1000px
 }
 
+/* ****** PROFILE ******** */
+div.profile {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+/* ****** ******* ******** */
+
+/* ****** REGISTER ******** */
+main.registration,
+main.login {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+/* ****** ******* ******** */
+
+
 /* .grid {
     display: grid;
     grid-template-rows: 80px auto 80px;

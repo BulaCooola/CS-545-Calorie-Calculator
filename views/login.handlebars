@@ -11,16 +11,19 @@
 <p class="error">{{error}}</p>
 {{/if}}
 
+<main class="login">
+    <section>
+        <h2> Login to your Account</h2>
+        <form action="/login" method="POST" id="login-form">
+            <label for="emailAddressInput">Email Address</label>
+            <input type="email" name="emailAddressInput" id='emailAddressInput' required>
+            <label for="passwordInput">Password</label>
+            <input type="password" name="passwordInput" id="passwordInput" required>
+            <button type="submit">Submit</button>
+        </form>
+        <p>No account? <a href="/register">Click here to register!</a></p>
+    </section>
+</main>
 
-    <h2> Login to your Account</h2>
-<form action="/login" method="POST" id="login-form">
-        <label for="emailAddressInput">Email Address</label>
-        <input type="email" name="emailAddressInput" id ='emailAddressInput' required>
-        <label for="passwordInput">Password</label>
-        <input type="password" name="passwordInput" id="passwordInput" required>
-        <button type="submit">Submit</button>
-    </form>
-
-<p>No account? <a href="/register">Click here to register!</a></p>
 
 <script>validateFormLogin('login-form')</script>

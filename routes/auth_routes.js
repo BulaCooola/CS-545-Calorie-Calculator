@@ -25,9 +25,8 @@ router.route('/index')
     const lightActivity = parseInt(userData.LightActivity);
     const moderateActivity = parseInt(userData.ModerateActivity);
     const heavyActivity = parseInt(userData.HeavyActivity);
-    const weightGoal = userData.weightGoal;
+    let weightGoal = userData.weightGoal;
     const goalLBS = parseInt(userData.goalLBS);
-
 
     if (!age || !weight || !sex || !height || resting < 0 || veryLightActivity < 0 || lightActivity < 0 || moderateActivity < 0 || heavyActivity < 0 ) {
       return res.status(400).render('index', { error: 'All fields are required.' });
@@ -77,6 +76,10 @@ router.route('/index')
         const activity_Factor = await activityFactor(resting, veryLightActivity, lightActivity, moderateActivity, heavyActivity)
         const caloricNeeds = await goalCalories(weightGoal, goalLBS, BMR, activity_Factor);
         
+        if (weightGoal === 'weightLoss') { weightGoal = 'Lose Weight'; }
+        if (weightGoal === 'weightMaintain') { weightGoal = 'Maintain Weight'; }
+        if (weightGoal === 'weightGain') { weightGoal = 'Gain Weight'; }
+
         if (req.session.user) {
           const saved = await saveData(req.session.user.username, weightGoal, activity_Factor,BMR, caloricNeeds)
           req.session.user = saved;
@@ -137,14 +140,19 @@ router.route('/register')
       }
     }
     catch (e) {
-      return res.status(400).send('oof');
+      return res.status(400).render('error', {error: 'Internal Server Error'});
     }
 
   });
 router.route('/profile')
   .get(async (req, res) => {
     // res.sendFile(path.resolve('front/profile.html'));
-    res.render('profile', { user: req.session.user });
+    if (!req.session.user) {
+      res.redirect('/register');
+    }
+    else {
+      res.render('profile', { user: req.session.user });
+    }
   });
 
 router.route('/calculator.html').get(async (req, res) => {
