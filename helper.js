@@ -1,20 +1,21 @@
+const username = document.getElementById('username')
+const email = document.getElementById('email')
+const password = document.getElementById('password')
+const confirmPassword = document.getElementById('confirm-password')
+const form = document.getElementById('form')
+const errorElement = document.getElementById('error')
 // const EmailValidator = require('email-validator');
 import * as EmailValidator from 'email-validator';
 
 
-function checkLetter(char) {
-    if (/[a-z]+/gi.test(char)) {
-        return true;
-    }
-    return false;
-}
+form.addEventListener('submit', (e) => {
+    console.log("Form submitted"); 
+    let messages = []
 
  function includesUpper(str) {
     if (/[A-Z]+/g.test(str)) {
         return true;
     }
-    return false;
-}
 
  function checkString(str) {
     if (!str || typeof str !== `string` || str.trim().length === 0) {
@@ -32,8 +33,20 @@ function checkLetter(char) {
     if (/[^a-zA-Z0-9]/g.test(str)) {
         return true;
     }
-    return false;
-}
+
+    if (!/\d/.test(password.value)) {
+        messages.push('Password must contain at least one number')
+    }
+
+    if (password.value !== confirmPassword.value) {
+        messages.push('Passwords do not match');
+    }
+
+    if (messages.length > 0) {
+        e.preventDefault()
+        errorElement.innerText = messages.join(', ')
+    }
+})
 
 export const checkEmail = (str) => {
      const email = checkString(str).toLowerCase();
