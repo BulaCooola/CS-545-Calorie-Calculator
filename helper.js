@@ -1,21 +1,22 @@
-const username = document.getElementById('username')
-const email = document.getElementById('email')
-const password = document.getElementById('password')
-const confirmPassword = document.getElementById('confirm-password')
-const form = document.getElementById('form')
-const errorElement = document.getElementById('error')
+// const username = document.getElementById('username')
+// const email = document.getElementById('email')
+// const password = document.getElementById('password')
+// const confirmPassword = document.getElementById('confirm-password')
+// const form = document.getElementById('form')
+// const errorElement = document.getElementById('error')
 // const EmailValidator = require('email-validator');
 import * as EmailValidator from 'email-validator';
 
 
-form.addEventListener('submit', (e) => {
-    console.log("Form submitted"); 
-    let messages = []
+// form.addEventListener('submit', (e) => {
+//     console.log("Form submitted"); 
+//     let messages = []
 
  function includesUpper(str) {
     if (/[A-Z]+/g.test(str)) {
         return true;
     }
+ }
 
  function checkString(str) {
     if (!str || typeof str !== `string` || str.trim().length === 0) {
@@ -46,7 +47,8 @@ form.addEventListener('submit', (e) => {
         e.preventDefault()
         errorElement.innerText = messages.join(', ')
     }
-})
+}
+// }})
 
 export const checkEmail = (str) => {
      const email = checkString(str).toLowerCase();
