@@ -1,0 +1,156 @@
+<link rel="stylesheet" href="../../public/css/FAQ.css">
+
+
+<h1>Frequently Asked Questions</h1>
+
+<ul class="navigation">
+    <li><a href="/index">Home</a></li>
+    <li><a href="/FAQ">FAQ</a></li>
+    <li><a href="/register">Register</a></li>
+    <li><a href="/profile">Profile</a></li>
+    <li><a href="/login">Login</a></li>
+    {{!-- <li><a href="calculator.html">Calorie Calculator</a></li> --}}
+    <!-- <li><a href="mealplan.html">Meal Planner</a></li> -->
+    <!-- <li><a href="visualization.html">Visualization</a></li> -->
+    <!-- <li><a href="foodtracker.html">Food Tracker</a></li> -->
+</ul>
+
+{{!-- <div class="faq-item"> --}}
+    {{!-- <div class="question" onclick="oggleAnswer(this)">INSERT QUESTION?</div> --}}
+    {{!-- <div class="answer">INSERT ANSWER</div> --}}
+    {{!-- </div> --}}
+
+<h2>Double click on the question to reveal the answer!</h2>
+
+<div class="faq-item">
+    <div class="question" onclick="toggleAnswer(this)">How do you use the calculator?</div>
+    <div class="answer">
+        <p>To use our Calorie Counter, follow these steps:</p>
+
+        <ol>
+            <li><strong>Fill in Personal Information:</strong> Enter your age, sex, weight, and height in the form.</li>
+            <li><strong>Specify Activity Levels:</strong> Indicate the number of hours you spend on various activities
+                based on our Activity Level Guide.</li>
+            <li><strong>Set Weight Goals:</strong> Choose your weight goal (Loss, Maintenance, or Gain) and specify the
+                desired weight change per week.</li>
+            <li><strong>Calculate:</strong> Click the "Calculate" button to obtain your Activity Level, Basal Metabolic
+                Rate (BMR), and Daily Caloric Needs.</li>
+            <li><strong>Optional: Save to Profile</strong> - If you have an account, you can click "Save to Profile" to
+                store your data for future reference.</li>
+        </ol>
+
+        <p>Review the outputs in the right sidebar, including your Activity Level, BMR, Daily Calories, and Macros
+            (coming soon!). Use this information to make informed decisions about your dietary and fitness goals.</p>
+
+        <p class="small"><em>Note: Make sure the total hours for your activity levels add up to 24 hours for accurate
+                calculations.</em></p>
+    </div>
+</div>
+
+<div class="faq-item">
+    <div class="question" onclick="toggleAnswer(this)">What is the Mifflin equation?</div>
+    <div class="answer">
+        The Mifflin-St Jeor equation is a formula used to estimate the number of calories your body
+        needs at rest, also known as the Basal Metabolic Rate (BMR). It takes into account your age, gender, weight,
+        and height to provide a more accurate estimate compared to other formulas.
+        <div class="faq-item">
+            <div class="question" onclick="toggleAnswer(this)">How is the Mifflin Equation calculated?</div>
+            <div class="answer">
+                The Mifflin Equation takes into account factors such as age, sex, weight, and height to provide a more
+                accurate estimation of one's BMR. The formula differs slightly for males and females, making it a
+                versatile tool for individuals seeking personalized nutritional guidance.
+                <ol>
+                    <li><strong>Male Equation:</strong> (10 * weight[kg]) + (6.25 * height[cm]) - (5 - age[yrs]) + 5
+                    </li>
+                    <li><strong>Female Equation:</strong> (10 * weight[kg]) + (6.25 * height[cm]) - (5 - age[yrs]) - 16
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="faq-item">
+    <div class="question" onclick="toggleAnswer(this)">What is Basal Metabolic Rate (BMR)?</div>
+    <div class="answer">
+        Basal Metabolic Rate (BMR) is the amount of energy expended by the body while at rest in a
+        neutrally temperate environment, in the post-absorptive state (meaning that the digestive system is
+        inactive, typically 12 hours after eating). It represents the minimum amount of energy needed to maintain
+        basic physiological functions such as breathing, circulation, cell production, and maintenance of body
+        temperature. <br>
+        In other words, BMR is the number of calories your body requires to perform essential functions while at
+        rest. It's often expressed in calories per day. BMR is influenced by several factors, including age, gender,
+        weight, height, and body composition. Generally, BMR decreases with age and tends to be higher in
+        individuals with more lean muscle mass.</div>
+</div>
+
+<div class="faq-item">
+    <div class="question" onclick="toggleAnswer(this)">What is an Activity Factor?</div>
+    <div class="answer">
+        The activity factor is a number that is used to multiply with your Basal Metabolic Rate. This will
+        calculate your <strong>total daily energy expenditure (TDEE)</strong>. This helps accounts
+        for extra calories burned throughout the day. It gives a more accurate reading of how much daily Calories
+        one would need. <br>
+        For example, if we take a 150lbs male athlete and a 150lbs average male that are both the same age, they
+        will have the same BMR. However, since the athlete does more activities throughout the day, they burn more
+        calories. They need to replace those lost calories, which is why their caloric needs are higher. The
+        activity level will account for the activities for each person and will help calculate an accurate reading
+        of caloric needs.
+        <p>Here is a table of different TDEE</p>
+        <section class="TDEE-table">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Level of Activity</th>
+                        <th>Example</th>
+                        <th>Activity Factor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sedentary</td>
+                        <td>Little to no exercise, such as a desk job with no additional physical activity</td>
+                        <td>1.2</td>
+                    </tr>
+                    <tr>
+                        <td>Lightly Active</td>
+                        <td>Light exercise 1-2 days/week</td>
+                        <td>1.375</td>
+                    </tr>
+                    <tr>
+                        <td>Moderately Active</td>
+                        <td>Moderate exercise 3-5 days/week</td>
+                        <td>1.55</td>
+                    </tr>
+                    <tr>
+                        <td>Very Active</td>
+                        <td>Hard exercise 6-7 days/week</td>
+                        <td>1.725</td>
+                    </tr>
+                    <tr>
+                        <td>Extremely Active</td>
+                        <td>Hard daily exercise and physical job or two times a day training</td>
+                        <td>1.9</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <p>The TDEE is determined by taking your BMR and multiplying it with their calculated activity factor.</p>
+        <p>While these formulas help visualize people's fitness journey's, <strong>they are only estimates</strong>.</p>
+    </div>
+</div>
+
+{{!-- <div class="faq-item">
+    <div class="question" onclick="toggleAnswer(this)">How do I contact customer support?</div>
+    <div class="answer">You can contact our customer support team by phone or email. Visit the Contact Us page for
+        more details.</div>
+</div> --}}
+
+
+
+<script>
+    function toggleAnswer(element) {
+        var answer = element.nextElementSibling;
+        answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+    }
+</script>

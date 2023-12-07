@@ -1,0 +1,39 @@
+<h1>My Profile</h1>
+
+<ul class="navigation">
+    <li><a href="/index">Home</a></li>
+    {{!-- <li><a href="/calculator">Calorie Calculator</a></li> --}}
+
+</ul>
+
+<div class="profile">
+    <section id="user-profile">
+        <main>
+            <h2>My Profile Information</h2>
+            <p><strong>Username:</strong> {{user.username}}</p>
+            <p><strong>Email:</strong> {{user.email}}</p>
+            <p><strong>Goal: </strong>{{user.currentGoal}}</p>
+            <p><strong>BMR: </strong>{{user.BMR}}</p>
+            <p><strong>Activity Factor: </strong>{{user.activity_level}}</p>
+            <p><strong>Estimated Caloric Needs: </strong>{{user.caloric_needs}}</p>
+            <!-- Add more user-specific information here -->
+
+            <a href="/logout">Log out</a>
+        </main>
+    </section>
+    <aside class="outputs">
+        {{!-- <section class="activity-level" id="activity-level">
+            <h2>Your Activity Level</h2>
+            <p id="calc-list">{{activityLevel}}</p>
+        </section>
+        </section>
+        <section class="bmr" id="bmr">
+            <h2>Your Basal Metabolic Rate: </h2>
+            <p id="bmr-list">{{bmr}}</p>
+        </section>
+        <section class="goal">
+            <h2>Your Daily Calories: </h2>
+            <p id="goal-list">{{goalCalories}}</p>
+        </section> --}}
+    </aside>
+</div>

@@ -1,34 +1,38 @@
-const username = document.getElementById('username')
-const email = document.getElementById('email')
-const password = document.getElementById('password')
-const confirmPassword = document.getElementById('confirm-password')
-const form = document.getElementById('form')
-const errorElement = document.getElementById('error')
+// const username = document.getElementById('username')
+// const email = document.getElementById('email')
+// const password = document.getElementById('password')
+// const confirmPassword = document.getElementById('confirm-password')
+// const form = document.getElementById('form')
+// const errorElement = document.getElementById('error')
 // const EmailValidator = require('email-validator');
+import * as EmailValidator from 'email-validator';
 
-form.addEventListener('submit', (e) => {
-    console.log("Form submitted"); 
-    let messages = []
 
-    if (!/^[a-zA-Z0-9]+$/.test(username.value)) {
-        messages.push('Username must be alphanumeric')
+// form.addEventListener('submit', (e) => {
+//     console.log("Form submitted"); 
+//     let messages = []
+
+ function includesUpper(str) {
+    if (/[A-Z]+/g.test(str)) {
+        return true;
     }
-    
-    if (username.value.length < 3 || username.value.length > 15) {
-        messages.push('Username must be between 3 and 15 characters')
+ }
+
+ function checkString(str) {
+    if (!str || typeof str !== `string` || str.trim().length === 0) {
+      throw `Error: ${str} is not a valid string`;
     }
-
-    // const usernameExists = await checkUsernameExists(username.value);
-    // if (usernameExists) {
-    //     messages.push('Username already exists');
-    // }
-
-    if (password.value.length < 5 || password.value.length > 20) {
-        messages.push('Password must be between 5 and 20 characters')
+    return str.trim();
+}
+ function includesNum(str) {
+    if (/\d+/g.test(str)) {
+        return true;
     }
-
-    if (!/[a-zA-Z]/.test(password.value)) {
-        messages.push('Password must contain at least one letter')
+    return false;
+}
+ function includesSpecial(str) {
+    if (/[^a-zA-Z0-9]/g.test(str)) {
+        return true;
     }
 
     if (!/\d/.test(password.value)) {
@@ -43,12 +47,39 @@ form.addEventListener('submit', (e) => {
         e.preventDefault()
         errorElement.innerText = messages.join(', ')
     }
-})
+}
+// }})
 
-// function checkEmail(str) {
-//     const email = checkString(str).toLowerCase();
-//     if (!EmailValidator.validate(email)) {
-//         throw `Error: ${email} is an invalid email`;
-//     }
-//     return email;
-// }
+export const checkEmail = (str) => {
+     const email = checkString(str).toLowerCase();
+     if (!EmailValidator.validate(email)) {
+         throw `Error: ${email} is an invalid email`;
+     }
+     return email;
+}
+
+export const checkPassword = (str) =>{
+    const password = checkString(str);
+
+    if (password.length < 5 || password.length > 20) {
+        throw 'Error: Password must be between 5 and 20 characters';
+    }
+    if (password.includes(' ') || !includesNum(password) || !includesUpper(password) || !includesSpecial(password)) {
+        throw `Error: Password must contain at least one number, one uppercase character, and one special character`;
+    }
+    return password;
+}
+
+export const checkUsername = (str) => {
+    let name = checkString(str);
+    if (name.length < 3 || name.length > 15) {
+        throw `Error: ${name} must be between 3 to 15 characters`;
+    }
+    for (let i = 0; i < name.length; i++) {
+        if (!checkLetter(name[i])) {
+            throw `Error: ${name} must only contain valid letters`;
+        }
+    }
+    return name;
+}
+

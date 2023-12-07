@@ -1,0 +1,226 @@
+<h1>Calorie Counter</h1>
+<p class="h1">Easily calculate your calories to achieve your weight goals!</p>
+
+<ul class="navigation">
+    <li><a href="/index">Home</a></li>
+    <li><a href="/FAQ">FAQ</a></li>
+    <li><a href="/register">Register</a></li>
+    <li><a href="/profile">Profile</a></li>
+    <li><a href="/login">Login</a></li>
+    {{!-- <li><a href="calculator.html">Calorie Calculator</a></li> --}}
+    <!-- <li><a href="mealplan.html">Meal Planner</a></li> -->
+    <!-- <li><a href="visualization.html">Visualization</a></li> -->
+    <!-- <li><a href="foodtracker.html">Food Tracker</a></li> -->
+</ul>
+
+<div class="grid">
+    <header class="guide">
+        <section>
+            <h2>Activity Level Guide:</h2>
+            <p>In order to calculate the estimate amount of calories burned, we need to quantify the amount of hours
+                spent on different activities on the average day. <br> <br> To get an accurate calculation, follow the
+                guidelines below:</p>
+            <h3>Resting:</h3>
+            <p>Sleeping, non-movement</p>
+            <h3>Very Light Activity:</h3>
+            <p>Standing, sitting, etc. Example: on a couch watching netflix, on a computer, sitting in class, ...</p>
+            <h3>Light Activity:</h3>
+            <p>Walking, stretching, activities with some movement. Example: shopping, doing errands/chores, sporadic
+                activities</p>
+            <h3>Moderate Activity:</h3>
+            <p>Traditional weight lifting, jogging, occasional time in gym</p>
+            <h3>Heavy Activity:</h3>
+            <p>Sprints, intense cardio, very high intensity workouts</p>
+        </section>
+    </header>
+    <!-- <aside>teset</aside> -->
+    <main class="calorie-calculator">
+        <h1 class="main-h1">OUR CALORIE CALCULATOR</h1>
+        <form id="calculate_calories_form" action="/index" method="POST" onsubmit="validate_form('calculate_calories_form')">
+
+            <h2 class="main">Mifflin Calculator</h2>
+            <p>Fill in the information below to receive your results:</p>
+
+            <label for="age">
+                Age:
+                <input type="number" id="age" name="age" required>
+            </label>
+
+            <label for="sex">Sex:
+                <select id="sex" name="sex" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select><br>
+            </label>
+
+            <label for="weight">
+                Weight (lbs):
+                <input type="number" id="weight" name="weight" required>
+            </label>
+
+            <label for="height">
+                Height (in):
+                <input type="number" id="height" name="height" required>
+            </label>
+
+            <h2 class="main">Activity Level: </h2>
+            <p class="small">(Hours MUST add up to 24 hours) </p>
+            <p class="guider">Refer to Activity Level Guide for help!</p>
+
+            <label for="Resting">
+                Resting/Sleeping (hours):
+                <input type="number" id="Resting" name="Resting" required>
+            </label>
+
+            <label for="VeryLightActivity">
+                Very Light Activity (hours):
+                <input type="number" id="VeryLightActivity" name="VeryLightActivity" required>
+            </label>
+
+            <label for="LightActivity">
+                Light Activity (hours):
+                <input type="number" id="LightActivity" name="LightActivity" required>
+            </label>
+
+            <label for="ModerateActivity">
+                Moderate Activity (hours):
+                <input type="number" id="ModerateActivity" name="ModerateActivity" required>
+            </label>
+
+            <label for="HeavyActivity">
+                Heavy Activity (hours):
+                <input type="number" id="HeavyActivity" name="HeavyActivity" required>
+            </label> <br>
+
+            <label for="weightGoal">
+                Weight Goal:
+                <select id="weightGoal" name="weightGoal" required>
+                    <option value="weightLoss">Weight Loss</option>
+                    <option value="weightMaintain">Weight Maintanence</option>
+                    <option value="weightGain">Weight Gain</option>
+                </select>
+            </label>
+
+            <label for="goalLBS">
+                Goal lbs (per week):
+                <input type="number" id="goalLBS" name="goalLBS" required>
+            </label>
+
+            {{#if error}}
+                <p class="error">{{error}}</p>
+            {{/if}}
+
+            <input type="submit" id="button1" name="button" value="Calculate">
+            <input type="submit" id="button2" name="button" value="Save to Profile">
+
+            <p class="small">No account? <a href="/register">Click here to register!</a></p>
+            <p>Need Help? <a href='/faq'>Click here to open FAQ!</a></p>
+        </form>
+
+        <section class="example">
+            <h2 class="example">Example Activity Factor Configurations</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Person</th>
+                        <th>Resting/Sleeping</th>
+                        <th>Very Light Activities</th>
+                        <th>Light Activities</th>
+                        <th>Moderate Activities</th>
+                        <th>Heavy Activities</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Student who walks to school, studies, and works out 1 hour a day</td>
+                        <td><a class="hours">7 Hours</a></td>
+                        <td><a class="hours">14 Hours</a></td>
+                        <td><a class="hours">2 Hours</a></td>
+                        <td><a class="hours">1 hour</a></td>
+                        <td><a class="hours">0 hours</a></td>
+                    </tr>
+                    <tr>
+                        <td>Student athlete who works out multiple times a day</td>
+                        <td><a class="hours">7 Hours</a></td>
+                        <td><a class="hours">12 Hours</a></td>
+                        <td><a class="hours">2 Hours</a></td>
+                        <td><a class="hours">2 hour</a></td>
+                        <td><a class="hours">1 hours</a></td>
+                    </tr>
+                    <tr>
+                        <td>Person who Workouts 3-5 times/week</td>
+                        <td><a class="hours">7 Hours</a></td>
+                        <td><a class="hours">12 Hours</a></td>
+                        <td><a class="hours">5 Hours</a></td>
+                        <td><a class="hours">0 hour</a></td>
+                        <td><a class="hours">0 hours</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="level-of-activity">
+            <h2 class="example">Table of Activity Factors</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Level of Activity</th>
+                        <th>Example</th>
+                        <th>Activity Factor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sedentary</td>
+                        <td>Little to no exercise, such as a desk job with no additional physical activity</td>
+                        <td>1.2</td>
+                    </tr>
+                    <tr>
+                        <td>Lightly Active</td>
+                        <td>Light exercise 1-2 days/week</td>
+                        <td>1.375</td>
+                    </tr>
+                    <tr>
+                        <td>Moderately Active</td>
+                        <td>Moderate exercise 3-5 days/week</td>
+                        <td>1.55</td>
+                    </tr>
+                    <tr>
+                        <td>Very Active</td>
+                        <td>Hard exercise 6-7 days/week</td>
+                        <td>1.725</td>
+                    </tr>
+                    <tr>
+                        <td>Extremely Active</td>
+                        <td>Hard daily exercise and physical job or two times a day training</td>
+                        <td>1.9</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+    </main>
+
+    <aside class="outputs">
+        <h2 class="results">Your Results are:</h2>
+        <section class="activity-level" id="activity-level">
+            <h2>Your Activity Level</h2>
+            <p id="calc-list">{{activityLevel}}</p>
+        </section>
+        </section>
+        <section class="bmr" id="bmr">
+            <h2>Your Basal Metabolic Rate: </h2>
+            <p id="bmr-list">{{bmr}}</p>
+        </section>
+        <section class="goal">
+            <h2>Your Estimated Daily Calories: </h2>
+            <p id="goal-list">{{goalCalories}}</p>
+        </section>
+        {{!-- <section class="macro">
+            <h2>Macros</h2>
+            <p id="macro-list"></p>
+        </section> --}}
+    </aside>
+
+    <!-- <footer>FW</footer> -->
+</div>

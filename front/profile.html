@@ -1,44 +1,38 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>My Profile</title>
     <link rel="stylesheet" type="text/css" href="../public/css/styles.css">
 </head>
+
 <body>
-    <header>
-        <h1>My Profile</h1>
-    </header>
+    <h1>My Profile</h1>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="calculator.html">Calorie Calculator</a></li>
-            <!-- Add links to other sections of your website as needed -->
-        </ul>
-    </nav>
+    <ul class="navigation">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="calculator.html">Calorie Calculator</a></li>
 
-    <main>
-        <section id="user-profile">
-            <h2>My Profile Information</h2>
-            <p><strong>Username:</strong> johndoe</p>
-            <p><strong>Email:</strong> john.doe@example.com</p>
-            <!-- Add more user-specific information here -->
+    </ul>
 
-            <h2>Edit Profile</h2>
-            <form action="update_profile.php" method="POST">
-                <label for="new-email">New Email:</label>
-                <input type="email" id="new-email" name="new-email"><br>
+    <section id="user-profile">
+        <h2>My Profile Information</h2>
+        <p><strong>Username:</strong> johndoe</p>
+        <p><strong>Email:</strong> john.doe@example.com</p>
+        <!-- Add more user-specific information here -->
 
-                <label for="new-password">New Password:</label>
-                <input type="password" id="new-password" name="new-password"><br>
+        <h2>Edit Profile</h2>
+        <form action="update_profile.html" method="POST">
+            <label for="new-email">New Email:</label>
+            <input type="email" id="new-email" name="new-email"><br>
 
-                <input type="submit" value="Update Profile">
-            </form>
-        </section>
-    </main>
+            <label for="new-password">New Password:</label>
+            <input type="password" id="new-password" name="new-password"><br>
 
-    <footer>
-        <p>&copy; 2023 Calorie Counting Website</p>
-    </footer>
+            <input type="submit" value="Update Profile">
+        </form>
+    </section>
+    
 </body>
+
 </html>
