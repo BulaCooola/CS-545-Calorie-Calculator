@@ -153,7 +153,7 @@ router.route('/calculator.html').get(async (req, res) => {
 });
 router.route('/logout').get(async (req, res) => {
   req.session.destroy();
-  return res.sendFile(path.resolve('front/logout.html'));
+  return res.redirect('/index');
 });
 
 export default router;
