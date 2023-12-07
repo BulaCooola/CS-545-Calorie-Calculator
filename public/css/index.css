@@ -61,8 +61,8 @@ ul.navigation {
     padding: 0;
     padding-top: 15px;
     padding-bottom: 15px;
-    display: flex;
     list-style-type: none;
+    overflow: auto;
 }
 
 ul li a {
@@ -185,6 +185,11 @@ aside.outputs {
     }
 }
 
+p.error {
+    color: red;
+    text-decoration: none;
+}
+
 main.calorie-calculator {
     padding-top: 10px;
 
@@ -250,6 +255,7 @@ main.calorie-calculator {
         border: 10px double #000000;
         border-radius: 20px;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+
         & label {
             display: flex;
             justify-content: center;
@@ -265,11 +271,6 @@ main.calorie-calculator {
             display: block;
             margin-top: 20px;
             margin: auto;
-        }
-
-        & p.error {
-            color: red;
-            text-decoration: none;
         }
     }
 
@@ -323,8 +324,8 @@ main.calorie-calculator {
     }
 }
 
-.tag {
-    padding-top: 1000px
+footer.tag {
+    padding-top: 1000px;
 }
 
 /* ****** PROFILE ******** */
@@ -345,6 +346,27 @@ main.login {
 }
 
 /* ****** ******* ******** */
+/* Table */
+table.profile-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+
+    & th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    & th {
+        background-color: #f2f2f2;
+    }
+
+    & a.hours {
+        display: block;
+    }
+}
 
 
 /* .grid {

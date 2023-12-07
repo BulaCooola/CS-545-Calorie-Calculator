@@ -55,7 +55,7 @@ function validateInputs(formid) {
         goalLBS: parseFloat(document.getElementById("goalLBS").value)
     }
 
-    if (!formData.age || !formData.weight || !formData.sex || !formData.height || formData.resting < 0 || formData.veryLightActivity< 0|| formData.lightActivity< 0|| formData.moderateActivity < 0 || formData.heavyActivity< 0) {
+    if (!formData.age || !formData.weight || !formData.sex || !formData.height || formData.resting < 0 || formData.veryLightActivity < 0 || formData.lightActivity < 0 || formData.moderateActivity < 0 || formData.heavyActivity < 0) {
         alert('All fields must be provided.');
         return false;
     }
@@ -88,75 +88,9 @@ function validateInputs(formid) {
         alert('Weight Goal is too unrealistic.')
         return false;
     }
-    
+
     return true;
 }
-
-// function activity_level(event) {
-
-//     event.preventDefault();
-//     // Get form data
-//     const formData = {
-//         age: document.getElementById("age").value,
-//         weight: document.getElementById("weight").value,
-//         sex: document.getElementById("gender").value,
-//         height: document.getElementById("height").value,
-//         resting: parseFloat(document.getElementById("Resting").value),
-//         veryLightActivity: parseFloat(document.getElementById("VeryLightActivity").value),
-//         lightActivity: parseFloat(document.getElementById("LightActivity").value),
-//         moderateActivity: parseFloat(document.getElementById("ModerateActivity").value),
-//         heavyActivity: parseFloat(document.getElementById("HeavyActivity").value),
-//         weightGoal: document.getElementById("weightGoal").value,
-//         goalLBS: parseFloat(document.getElementById("goalLBS").value)
-//     }
-
-//     const checkHours = formData.resting + formData.veryLightActivity + formData.lightActivity + formData.moderateActivity + formData.heavyActivity;
-
-//     if (checkHours !== 24) {
-//         // Create an error message element
-//         const errorMessage = document.createElement("p");
-//         errorMessage.textContent = "Error: The total hours should be equal to 24. Please adjust your input.";
-//         errorMessage.style.color = "red";  // Set the text color to red, for example
-
-//         // Insert the error message next to the calculate button
-//         const calculateButton = document.querySelector("#calculate_calories_form [type='submit']");
-//         calculateButton.parentNode.insertBefore(errorMessage, calculateButton.nextSibling);
-
-//         // Optionally, you can also remove the error message after a certain duration or when the user interacts with the form again
-//         setTimeout(() => {
-//             errorMessage.remove();
-//         }, 5000);  // Remove the error message after 5 seconds (adjust the duration as needed)
-//         return;
-//     } else {
-//         // Continue with the rest of your calculations
-//         const activityFactor = checkHours / 24;
-//         // Add more calculations or actions here
-//     }
-
-//     // VALUES TO DISPLAY
-//     const activityFactor = (formData.resting * 1 + formData.veryLightActivity * 1.2 + formData.lightActivity * 2.5 + formData.moderateActivity * 5 + formData.heavyActivity * 7) / 24
-//     const base = calcBMR(formData.age, formData.weight, formData.height, formData.sex);
-//     const goalCals = goals(formData.weightGoal, formData.goalLBS, formData.base, formData.activityFactor);
-
-//     // DISPLAY
-//     const calc = document.getElementById('calc-list');
-//     calc.innerHTML = "";
-//     const aF = document.createElement("li");
-//     aF.textContent = `Activity Factor- ${activityFactor.toFixed(2)} `
-//     calc.appendChild(aF);
-
-//     const bmr = document.createElement("li");
-//     const bmrLog = document.getElementById('bmr-list');
-//     bmrLog.innerHTML = "";
-//     bmr.textContent = `Basal Metabolic Rate- ${base.toFixed(0)} Calories`
-//     bmrLog.appendChild(bmr)
-
-//     const gw = document.createElement("li");
-//     const gwLog = document.getElementById('goal-list');
-//     gwLog.innerHTML = "";
-//     gw.textContent = `${goalCals}`;
-//     gwLog.appendChild(gw);
-// }
 
 function validateformLogin(formId) {
     const form = document.getElementById(formId);

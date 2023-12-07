@@ -76,7 +76,7 @@ export const checkUsername = (str) => {
         throw `Error: ${name} must be between 3 to 15 characters`;
     }
     for (let i = 0; i < name.length; i++) {
-        if (!checkLetter(name[i])) {
+        if (!(/^[a-zA-Z]+$/.test(name[i]))) {
             throw `Error: ${name} must only contain valid letters`;
         }
     }

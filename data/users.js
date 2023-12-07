@@ -18,21 +18,39 @@ export const registerUser = async (
     email = email.trim();
     password = password.trim();
     confirmPassword = confirmPassword.trim();
+
+    const userCollection = await users();
+    const findUserName = await userCollection.findOne({username: username});
+    if (findUserName) {
+        throw `username already exists, pick another`
+    }
+
     if(password !== confirmPassword){
         throw 'passwords must be the same';
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const userCollection = await users();
     let newUser = { 
         username:username,
         email:email,
         password: hashedPassword,
+        inputParams: {
+            age: null,
+            sex: null,
+            weight: null,
+            height: null,
+            resting: null,
+            veryLightActivity:null,
+            lightActivity: null,
+            moderateActivity: null,
+            heavyActivity: null
+        },
         currentGoal: '',
         activity_level: 1,
         BMR: 0,
         caloric_needs: 0,
     }
+
     let insertInfo = await userCollection.insertOne(newUser);
     if (!insertInfo.acknowledged || !insertInfo.insertedId) {
         throw 'Could not add user';
@@ -91,19 +109,21 @@ export const updateUser = async (username,email,password)=>{
 
 export const saveData = async (
     username,
+    inputParams,
     currentGoal,
     activity_level,
     BMR,
     caloric_needs) => {
 
-    // activity_level = activity_level.toFixed(2);
-    // BMR = BMR.toFixed(0);
-    // caloric_needs = caloric_needs.toFixed(0);
+    activity_level = Number(activity_level.toFixed(2));
+    BMR = Number(BMR.toFixed(0));
+    // caloric_needs = Number(caloric_needs.toFixed(0));
 
     const userCollection = await users();
     const updatedUser = await userCollection.findOneAndUpdate(
         {username: username},
         {$set: {
+            inputParams: inputParams,
             currentGoal: currentGoal,
             activity_level:activity_level,
             BMR: `${BMR} Calories`,

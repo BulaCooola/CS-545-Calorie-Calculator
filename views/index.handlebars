@@ -36,7 +36,8 @@
     <!-- <aside>teset</aside> -->
     <main class="calorie-calculator">
         <h1 class="main-h1">OUR CALORIE CALCULATOR</h1>
-        <form id="calculate_calories_form" action="/index" method="POST" onsubmit="validate_form('calculate_calories_form')">
+        <form id="calculate_calories_form" action="/index" method="POST"
+            onsubmit="validate_form('calculate_calories_form')">
 
             <h2 class="main">Mifflin Calculator</h2>
             <p>Fill in the information below to receive your results:</p>
@@ -107,15 +108,168 @@
             </label>
 
             {{#if error}}
-                <p class="error">{{error}}</p>
+            <p class="error">{{error}}</p>
             {{/if}}
 
             <input type="submit" id="button1" name="button" value="Calculate">
             <input type="submit" id="button2" name="button" value="Save to Profile">
+            {{!-- <input type="submit" id="button3" name="button" value="Load from Profile"> --}}
+
 
             <p class="small">No account? <a href="/register">Click here to register!</a></p>
             <p>Need Help? <a href='/faq'>Click here to open FAQ!</a></p>
         </form>
+
+        <script>
+            function loadExampleInputs(num) {
+                // Example input values
+                const exampleInputs1 = {
+                    age: 20,
+                    sex: 'male',
+                    weight: 150,
+                    height: 67,
+                    Resting: 7,
+                    VeryLightActivity: 14,
+                    LightActivity: 2,
+                    ModerateActivity: 1,
+                    HeavyActivity: 0,
+                    weightGoal: 'weightMaintain',
+                    goalLBS: 0
+                }
+
+                const exampleInputs2 = {
+                    age: 20,
+                    sex: 'female',
+                    weight: 140,
+                    height: 64,
+                    Resting: 7,
+                    VeryLightActivity: 12,
+                    LightActivity: 2,
+                    ModerateActivity: 2,
+                    HeavyActivity: 1,
+                    weightGoal: 'weightLoss',
+                    goalLBS: 1
+                }
+
+                const exampleInputs3 = {
+                    age: 25,
+                    sex: 'male',
+                    weight: 150,
+                    height: 67,
+                    Resting: 7,
+                    VeryLightActivity: 12,
+                    LightActivity: 5,
+                    ModerateActivity: 0,
+                    HeavyActivity: 0,
+                    weightGoal: 'weightGain',
+                    goalLBS: 1
+                }
+                
+                const exampleInputs4 = {
+                    age: 25,
+                    sex: 'male',
+                    weight: 150,
+                    height: 67,
+                    Resting: 8,
+                    VeryLightActivity: 15,
+                    LightActivity: 1,
+                    ModerateActivity: 0,
+                    HeavyActivity: 0,
+                    weightGoal: 'weightMaintain',
+                    goalLBS: 0
+                }
+
+                const exampleInputs5 = {
+                    age: 25,
+                    sex: 'male',
+                    weight: 150,
+                    height: 67,
+                    Resting: 8,
+                    VeryLightActivity: 13,
+                    LightActivity: 3,
+                    ModerateActivity: 0,
+                    HeavyActivity: 0,
+                    weightGoal: 'weightLoss',
+                    goalLBS: 1
+                }
+
+                const exampleInputs6 = {
+                    age: 25,
+                    sex: 'male',
+                    weight: 150,
+                    height: 67,
+                    Resting: 7,
+                    VeryLightActivity: 14,
+                    LightActivity: 2,
+                    ModerateActivity: 1,
+                    HeavyActivity: 0,
+                    weightGoal: 'weightLoss',
+                    goalLBS: 1
+                };
+
+                // Set values to the corresponding input fields
+                if (num === 1) {
+                    for (const key in exampleInputs2) {
+                        if (exampleInputs1.hasOwnProperty(key)) {
+                            const element = document.getElementById(key);
+                            if (element) {
+                                element.value = exampleInputs1[key];
+                            }
+                        }
+                    }
+                }
+                if (num === 2) {
+                    for (const key in exampleInputs2) {
+                        if (exampleInputs2.hasOwnProperty(key)) {
+                            const element = document.getElementById(key);
+                            if (element) {
+                                element.value = exampleInputs2[key];
+                            }
+                        }
+                    }
+                }
+                if (num === 3) {
+                    for (const key in exampleInputs3) {
+                        if (exampleInputs3.hasOwnProperty(key)) {
+                            const element = document.getElementById(key);
+                            if (element) {
+                                element.value = exampleInputs3[key];
+                            }
+                        }
+                    }
+                }
+                if (num === 4) {
+                    for (const key in exampleInputs4) {
+                        if (exampleInputs4.hasOwnProperty(key)) {
+                            const element = document.getElementById(key);
+                            if (element) {
+                                element.value = exampleInputs4[key];
+                            }
+                        }
+                    }
+                }
+                if (num === 5) {
+                    for (const key in exampleInputs5) {
+                        if (exampleInputs5.hasOwnProperty(key)) {
+                            const element = document.getElementById(key);
+                            if (element) {
+                                element.value = exampleInputs5[key];
+                            }
+                        }
+                    }
+                }
+                if (num === 6) {
+                    for (const key in exampleInputs6) {
+                        if (exampleInputs6.hasOwnProperty(key)) {
+                            const element = document.getElementById(key);
+                            if (element) {
+                                element.value = exampleInputs6[key];
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
 
         <section class="example">
             <h2 class="example">Example Activity Factor Configurations</h2>
@@ -128,6 +282,7 @@
                         <th>Light Activities</th>
                         <th>Moderate Activities</th>
                         <th>Heavy Activities</th>
+                        <th>Load example</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -138,6 +293,7 @@
                         <td><a class="hours">2 Hours</a></td>
                         <td><a class="hours">1 hour</a></td>
                         <td><a class="hours">0 hours</a></td>
+                        <td><input type="button" value="Load Example" onclick="loadExampleInputs(1)"></td>
                     </tr>
                     <tr>
                         <td>Student athlete who works out multiple times a day</td>
@@ -146,14 +302,43 @@
                         <td><a class="hours">2 Hours</a></td>
                         <td><a class="hours">2 hour</a></td>
                         <td><a class="hours">1 hours</a></td>
+                        <td><input type="button" value="Load Example" onclick="loadExampleInputs(2)"></td>
                     </tr>
                     <tr>
-                        <td>Person who Workouts 3-5 times/week</td>
+                        <td>Person who goes to gym 3-5 times/week</td>
                         <td><a class="hours">7 Hours</a></td>
                         <td><a class="hours">12 Hours</a></td>
                         <td><a class="hours">5 Hours</a></td>
                         <td><a class="hours">0 hour</a></td>
                         <td><a class="hours">0 hours</a></td>
+                        <td><input type="button" value="Load Example" onclick="loadExampleInputs(3)"></td>
+                    </tr>
+                    <tr>
+                        <td>Person with desk job and no exercise</td>
+                        <td><a class="hours">8 Hours</a></td>
+                        <td><a class="hours">15 Hours</a></td>
+                        <td><a class="hours">1 Hours</a></td>
+                        <td><a class="hours">0 hour</a></td>
+                        <td><a class="hours">0 hours</a></td>
+                        <td><input type="button" value="Load Example" onclick="loadExampleInputs(4)"></td>
+                    </tr>
+                    <tr>
+                        <td>Person who goes on walks everyday</td>
+                        <td><a class="hours">8 Hours</a></td>
+                        <td><a class="hours">13 Hours</a></td>
+                        <td><a class="hours">3 Hours</a></td>
+                        <td><a class="hours">0 hour</a></td>
+                        <td><a class="hours">0 hours</a></td>
+                        <td><input type="button" value="Load Example" onclick="loadExampleInputs(5)"></td>
+                    </tr>
+                    <tr>
+                        <td>Person who goes to gym 1-2 times a week</td>
+                        <td><a class="hours">7 Hours</a></td>
+                        <td><a class="hours">14 Hours</a></td>
+                        <td><a class="hours">2 Hours</a></td>
+                        <td><a class="hours">1 hour</a></td>
+                        <td><a class="hours">0 hours</a></td>
+                        <td><input type="button" value="Load Example" onclick="loadExampleInputs(6)"></td>
                     </tr>
                 </tbody>
             </table>

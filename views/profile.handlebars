@@ -12,11 +12,47 @@
             <h2>My Profile Information</h2>
             <p><strong>Username:</strong> {{user.username}}</p>
             <p><strong>Email:</strong> {{user.email}}</p>
-            <p><strong>Goal: </strong>{{user.currentGoal}}</p>
-            <p><strong>BMR: </strong>{{user.BMR}}</p>
-            <p><strong>Activity Factor: </strong>{{user.activity_level}}</p>
-            <p><strong>Estimated Caloric Needs: </strong>{{user.caloric_needs}}</p>
-            <!-- Add more user-specific information here -->
+            <table class="profile-table">
+                <thead>
+                    <tr>
+                        <th>Goal</th>
+                        <th>BMR</th>
+                        <th>Activity Factor</th>
+                        <th>Estimated Caloric Needs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a class="hours">{{user.currentGoal}}</a></td>
+                        <td><a class="hours">{{user.BMR}}</a></td>
+                        <td><a class="hours"><strong>{{user.activity_level}}</strong></a></td>
+                        <td><a class="hours">{{user.caloric_needs}}</a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <table class="profile-table">
+                <h2>Your Activity Level Input</h2>
+                <thead>
+                    <tr>
+                        <th>Resting/Sleeping</th>
+                        <th>Very Light Activities</th>
+                        <th>Light Activities</th>
+                        <th>Moderate Activities</th>
+                        <th>Heavy Activities</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a class="hours">{{user.inputParams.resting}} Hours</a></td>
+                        <td><a class="hours">{{user.inputParams.veryLightActivity}} Hours</a></td>
+                        <td><a class="hours">{{user.inputParams.lightActivity}} Hours</a></td>
+                        <td><a class="hours">{{user.inputParams.moderateActivity}} Hours</a></td>
+                        <td><a class="hours">{{user.inputParams.heavyActivity}} Hours</a></td>
+                    </tr>
+                </tbody>
+            </table>
 
             <a href="/logout">Log out</a>
         </main>
