@@ -12,6 +12,26 @@
             <h2>My Profile Information</h2>
             <p><strong>Username:</strong> {{user.username}}</p>
             <p><strong>Email:</strong> {{user.email}}</p>
+
+            <table class="profile-table">
+                <thead>
+                    <tr>
+                        <th>Age</th>
+                        <th>Sex</th>
+                        <th>Weight</th>
+                        <th>Height</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a class="hours">{{user.inputParams.age}}</a></td>
+                        <td><a class="hours">{{user.inputParams.sex}}</a></td>
+                        <td><a class="hours">{{user.inputParams.weight}} lbs.</a></td>
+                        <td><a class="hours">{{user.inputParams.height}} inches</a></td>
+                    </tr>
+                </tbody>
+            </table>
+
             <table class="profile-table">
                 <thead>
                     <tr>
@@ -30,7 +50,6 @@
                     </tr>
                 </tbody>
             </table>
-
 
             <table class="profile-table">
                 <h2>Your Activity Level Input</h2>
@@ -57,19 +76,4 @@
             <a href="/logout">Log out</a>
         </main>
     </section>
-    <aside class="outputs">
-        {{!-- <section class="activity-level" id="activity-level">
-            <h2>Your Activity Level</h2>
-            <p id="calc-list">{{activityLevel}}</p>
-        </section>
-        </section>
-        <section class="bmr" id="bmr">
-            <h2>Your Basal Metabolic Rate: </h2>
-            <p id="bmr-list">{{bmr}}</p>
-        </section>
-        <section class="goal">
-            <h2>Your Daily Calories: </h2>
-            <p id="goal-list">{{goalCalories}}</p>
-        </section> --}}
-    </aside>
 </div>

@@ -75,6 +75,7 @@ export const loginUser = async (email, password) => {
     return{
         username:findEmail.username,
         email:findEmail.email,
+        inputParams: findEmail.inputParams,
         currentGoal:findEmail.currentGoal,
         BMR:findEmail.BMR,
         activity_level:findEmail.activity_level,

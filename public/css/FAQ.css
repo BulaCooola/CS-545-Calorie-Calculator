@@ -117,7 +117,7 @@ a:hover::after {
         display: flex;
         font-weight: 600;
         font-size: 32px;
-        
+
         color: rgb(0, 0, 0);
         text-decoration: none;
         text-transform: uppercase;
@@ -144,6 +144,7 @@ a:hover::after {
         opacity: 0;
         transition: all 0.3s;
     }
+
     & .question:after {
         content: "";
         position: absolute;
@@ -175,8 +176,12 @@ a:hover::after {
         align-content: center;
         margin-left: 20px;
         font-size: 18px;
+        /* box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.3);
+        border: 2pt inset rgb(98, 98, 98);
+        padding: 5px; */
     }
 }
+
 .faq-item:hover {
     cursor: pointer;
 }
